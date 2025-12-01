@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HStreamer - Web Client</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HStreamer Web Client</h1>
+            <p class="subtitle">Low-Latency Android Screen Streaming</p>
+        </header>
+
+        <div class="control-panel">
+            <div class="connection-settings">
+                <label for="wsUrl">Gateway WebSocket URL:</label>
+                <input
+                    type="text"
+                    id="wsUrl"
+                    value="ws://localhost:8765/ws"
+                    placeholder="ws://raspberry-pi-ip:8765/ws">
+
+                <button id="btnConnect" class="btn btn-primary">Connect</button>
+                <button id="btnDisconnect" class="btn btn-secondary" disabled>Disconnect</button>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span id="statusText" class="status-value">Disconnected</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">FPS:</span>
+                    <span id="fpsText" class="status-value">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Latency:</span>
+                    <span id="latencyText" class="status-value">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <canvas id="videoCanvas"></canvas>
+            <div id="noSignal" class="no-signal">
+                <div class="no-signal-content">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    <p>No Signal</p>
+                    <small>Connect to gateway to start streaming</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="btnFullscreen" class="btn btn-control">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                </svg>
+                Fullscreen
+            </button>
+            <button id="btnScreenshot" class="btn btn-control">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                Screenshot
+            </button>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 HStreamer | Low-Latency Screen Streaming System</p>
+        </footer>
+    </div>
+
+    <script src="opus-decoder.min.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>

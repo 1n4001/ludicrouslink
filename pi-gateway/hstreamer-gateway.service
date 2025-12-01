@@ -1,0 +1,28 @@
+[Unit]
+Description=HStreamer Gateway Service
+Documentation=https://github.com/your-repo/hstreamer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/hstreamer-gateway
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+ExecStart=/usr/bin/python3 /home/pi/hstreamer-gateway/gateway.py --rtsp-url rtsp://192.168.1.100:8554/live --ws-host 0.0.0.0 --ws-port 8765
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hstreamer-gateway
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/pi/hstreamer-gateway
+
+[Install]
+WantedBy=multi-user.target

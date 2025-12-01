@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(move INTEGRATED_WEB_SERVER.md docsintegrated-web-server.md)",
+      "Bash(curl -L -o opus-decoder.min.js \"https://cdn.jsdelivr.net/npm/opus-decoder@0.7.7/dist/opus-decoder.min.js\")",
+      "Bash(curl -L -o opus-decoder.wasm \"https://cdn.jsdelivr.net/npm/opus-decoder@0.7.7/dist/opus-decoder.wasm\")",
+      "Bash(curl -L \"https://unpkg.com/opus-decoder@0.7.7/dist/\")",
+      "Bash(curl -L \"https://unpkg.com/@eshaz/web-worker@1.2.4/dist/web-worker.min.js\" -o web-worker.min.js)",
+      "Bash(curl -L \"https://unpkg.com/opus-decoder@0.7.7/\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
