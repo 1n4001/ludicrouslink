@@ -1,0 +1,349 @@
+/* ── App Shell ── */
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── Stream Container ── */
+.stream-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── Video ── */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.video-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+/* ── No Signal ── */
+.no-signal-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+    gap: 16px;
+}
+
+.no-signal-overlay .signal-icon {
+    width: 64px;
+    height: 64px;
+    border: 3px solid var(--text-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.no-signal-overlay .signal-icon::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: var(--text-dim);
+    border-radius: 50%;
+}
+
+@keyframes pulse-ring {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.no-signal-overlay p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ── Floating HUD (top-right) ── */
+.hud-overlay {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.hud-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.hud-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.hud-dot.live {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+}
+
+.hud-dot.waiting {
+    background: var(--amber);
+    animation: blink 1s step-end infinite;
+}
+
+.hud-dot.offline {
+    background: var(--red);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* ── Debug Overlay ── */
+.debug-overlay {
+    position: absolute;
+    top: 60px;
+    /* Below HUD, roughly */
+    left: 16px;
+    width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #eee;
+    z-index: 20;
+    pointer-events: auto;
+    /* allow scrolling */
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.debug-entry {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 2px;
+    word-break: break-all;
+}
+
+.debug-entry.error {
+    color: #ff6b6b;
+}
+
+.debug-entry.warn {
+    color: #fcc419;
+}
+
+.debug-entry.info {
+    color: #69db7c;
+}
+
+@media (max-width: 640px) {
+    .debug-overlay {
+        width: calc(100% - 32px);
+        max-height: 200px;
+    }
+}
+
+
+/* ── Bottom Control Bar ── */
+.control-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    z-index: 10;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ── Control bar sections ── */
+.control-left,
+.control-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    justify-content: center;
+}
+
+/* ── Buttons (48px minimum touch target) ── */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
+    border: none;
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    font-size: 1.2rem;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.btn-icon:hover {
+    background: var(--surface-hover);
+}
+
+.btn-icon:active {
+    transform: scale(0.92);
+    background: var(--surface-hover);
+}
+
+.btn-connect {
+    padding: 10px 24px;
+    width: auto;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    gap: 6px;
+    background: var(--accent);
+}
+
+.btn-connect:hover,
+.btn-connect:active {
+    background: var(--accent-hover);
+}
+
+.btn-disconnect {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--red);
+}
+
+.btn-disconnect:hover,
+.btn-disconnect:active {
+    background: rgba(239, 68, 68, 0.35);
+}
+
+/* ── URL input ── */
+.url-input {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-family: 'Inter', monospace;
+    width: 280px;
+    min-height: 48px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.url-input:focus {
+    border-color: var(--accent);
+}
+
+.url-input:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ── Tap-to-toggle visibility (JS adds/removes .controls-hidden) ── */
+.controls-hidden .control-bar {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+}
+
+.controls-hidden .hud-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Fullscreen styles ── */
+.stream-container:fullscreen {
+    background: #000;
+}
+
+.stream-container:fullscreen .control-bar {
+    padding: 16px 28px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .url-input {
+        width: 140px;
+        font-size: 0.8rem;
+    }
+
+    .hud-overlay {
+        top: 8px;
+        right: 8px;
+    }
+
+    .control-bar {
+        padding: 10px 12px;
+    }
+}

@@ -1,302 +1,102 @@
-# HStreamer - Low-Latency Android Screen & Audio Streaming
+# HStreamer - Low-Latency Android Screen Streaming
 
-A complete system for real-time screen and audio streaming from Android devices to web browsers over a local network.
+[![HStreamer CI](https://github.com/1n4001/hstreamer/actions/workflows/ci.yml/badge.svg)](https://github.com/1n4001/hstreamer/actions/workflows/ci.yml) 
+
+A complete system for real-time screen streaming from Android devices to web browsers over a local network.
 
 ## Quick Start
 
-**3 simple steps to start streaming:**
+### Prerequisites
+- **Android**: Android 10+ Device
+- **Host**: Windows/Linux/macOS with:
+  - Java 17+ (for Gradle)
+  - Go 1.22+
+  - Node.js 20+ (optional, Gradle can manage it)
 
-1. **Start Gateway** (on Raspberry Pi or Linux machine)
-   ```bash
-   cd pi-gateway
-   python3 gateway.py
-   ```
-
-2. **Start Streaming** (on Android)
-   - Open HStreamer app
-   - Select gateway from dropdown
-   - Tap "Start Streaming"
-
-3. **View Stream** (in web browser)
-   - Open http://gateway-ip:8765/
-   - Click "Connect"
-
-That's it! See [Quick Start Guide](docs/quick-start.md) for detailed instructions.
-
-## System Architecture (v2)
-
-```
-┌─────────────────┐         ┌──────────────────┐         ┌──────────────┐
-│  Android Device │         │  Gateway (Pi)    │         │  Web Browser │
-│                 │         │                  │         │              │
-│  Screen Capture ├────────►│  nginx-rtmp      │         │              │
-│  Audio Capture  │  RTMP   │       ↓          │         │              │
-│  (H.264/AAC)    │  Push   │  GStreamer       │         │              │
-│                 │         │  (decode/encode) │         │              │
-│                 │         │       ↓          │         │              │
-│                 │         │  HTTP Server     ├────────►│  Canvas      │
-│                 │         │  + WebSocket     │ HTTP/WS │  Web Audio   │
-│                 │         │  (video+audio)   │         │              │
-│                 │◄────────┤  mDNS Service    │         │              │
-│  Auto-discover  │  mDNS   │  (discovery)     │         │              │
-└─────────────────┘         └──────────────────┘         └──────────────┘
-```
-
-### How It Works
-
-1. **Android App** captures screen (H.264) and internal audio (AAC)
-2. **Android App** automatically discovers gateway via mDNS
-3. **Android App** pushes RTMP stream to gateway
-4. **Gateway** receives stream via nginx-rtmp
-5. **Gateway** processes with GStreamer:
-   - Decodes H.264 video → encodes to JPEG
-   - Decodes AAC audio → encodes to Opus
-6. **Gateway** serves web client and streams via WebSocket
-7. **Web Browser** displays video on canvas and plays audio
-
-## Features
-
-- **Low Latency** - 100-200ms end-to-end
-- **Video Streaming** - 720p @ 30fps, H.264 encoding
-- **Audio Streaming** - Internal audio capture, Opus codec
-- **Auto-Discovery** - No manual IP configuration needed
-- **Integrated Web Server** - Single unified gateway
-- **Multiple Viewers** - Multiple browsers can view simultaneously
-- **Modern Web UI** - Fullscreen, screenshots, FPS/latency stats
-
-## Documentation
-
-📖 **[Complete Documentation →](docs/)**
-
-### Essential Guides
-
-- **[Quick Start Guide](docs/quick-start.md)** - Get running in 3 steps
-- **[Integrated Web Server](docs/integrated-web-server.md)** - How the unified server works
-- **[Audio Implementation](docs/audio-implementation.md)** - Audio streaming details
-- **[Test Streaming](docs/test-streaming.md)** - Test with FFmpeg (no Android needed)
-- **[Troubleshooting](docs/troubleshooting.md)** - Common issues and solutions
-
-### Configuration & Setup
-
-- **[Network Setup](docs/network-setup.md)** - Network and firewall configuration
-- **[Install as Service](docs/install-as-service.md)** - Auto-start gateway on boot
-- **[Port Configuration](docs/port-change-summary.md)** - Customize ports
-
-### Reference
-
-- **[API Reference](docs/api.md)** - WebSocket message formats
-- **[Quick Reference](docs/quick-reference.md)** - Commands and tips
-- **[Project Structure](docs/project-structure.md)** - Codebase organization
-
-### Migration
-
-- **[v1 to v2 Migration](docs/migration-v1-to-v2.md)** - Upgrade from v1 (RTSP)
-
-## Requirements
-
-### Raspberry Pi Gateway
-- Raspberry Pi 3/4/5 (Pi 4+ recommended)
-- Raspbian/Debian Linux
-- Python 3.7+
-- GStreamer 1.14+
-- nginx with RTMP module
-
-### Android Device
-- Android 10+ (API 29+)
-- Internal audio requires Android 10+
-- Same network as gateway
-
-### Web Browser
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-
-## Installation
-
-### 1. Gateway Setup
+### Running the Server
+The project is a monorepo managed by Gradle. You can run the entire backend stack (which serves the frontend) with a single command:
 
 ```bash
-# Install nginx-rtmp
-cd pi-gateway
-chmod +x install_nginx_rtmp.sh
-./install_nginx_rtmp.sh
+# Windows
+./gradlew runBackend
 
-# Install Python dependencies
-pip3 install -r requirements.txt
-
-# Start gateway
-python3 gateway.py
+# Linux/Mac
+./gradlew runBackend
 ```
 
-See [Quick Start Guide](docs/quick-start.md) for detailed instructions.
+This command will:
+1. Build the React Frontend (`frontend/`)
+2. Copy assets to the Backend (`backend/public/`)
+3. Compile and Run the Go Backend (`backend/`)
 
-### 2. Android App
+Once running, access the web client at: **http://localhost:8080**
 
+### android App
+Build and install the Android app:
 ```bash
-# Build with Android Studio or Gradle
-cd android-app
-./gradlew assembleDebug
-adb install app/build/outputs/apk/debug/app-debug.apk
+./gradlew :hstreamerAndroid:app:installDebug
 ```
 
-### 3. Web Client
+## System Architecture (v3)
 
-The web client is automatically served by the gateway at:
-```
-http://gateway-ip:8765/
-```
+```mermaid
+graph LR
+    subgraph Android [Android Device]
+        Screen[Screen Capture<br/>H.264] -- "TCP Stream (MPEG-TS)" --> MPEGTS
+    end
 
-No separate installation needed!
+    subgraph Backend [Gateway Server (Go)]
+        MPEGTS[MPEG-TS Parser] -- "Extract NALUs" --> Hub
+        Hub[WebSocket Hub]
+        HTTPServer[HTTP Server]
+    end
 
-## Usage
-
-### Start Gateway
-```bash
-python3 gateway.py
-```
-
-**With custom settings:**
-```bash
-python3 gateway.py --http-port 9000 --rtmp-port 1935
-```
-
-### Test Without Android
-
-Use FFmpeg to generate and stream test video:
-
-```bash
-# Generate 10s test video
-ffmpeg -f lavfi -i testsrc=duration=10:size=1280x720:rate=30 \
-       -f lavfi -i sine=frequency=1000:duration=10 \
-       -c:v libx264 -c:a aac test.mp4
-
-# Stream on loop
-ffmpeg -re -stream_loop -1 -i test.mp4 \
-       -c:v copy -c:a copy \
-       -f flv rtmp://localhost:1935/live/stream
+    subgraph Frontend [Web Client (React)]
+        HTTPServer -. "HTTP (Serve App)" .-> React[React App]
+        Hub -- "WebSocket (H.264 Frames)" --> Decoder[WebCodecs API]
+        Decoder -- "Render" --> Canvas[Canvas]
+    end
 ```
 
-See [Test Streaming Guide](docs/test-streaming.md) for more options.
+### Improvements in v3
+- **Frontend**: Ported to **React + Vite** + TypeScript. Uses **WebCodecs API** for hardware-accelerated H.264 decoding in the browser.
+- **Backend**: Rewritten in **Go**. High-performance, concurrent handling of TCP streams and WebSocket broadcasting. Replaces Python/GStreamer.
+- **Build**: Unified **Gradle** build system. No manual `pip` or `npm` commands required for standard execution.
 
 ## Project Structure
 
 ```
 hstreamer/
-├── android-app/          # Android application (Kotlin)
-│   ├── app/src/main/
-│   │   ├── java/com/cesicorp/hstreamer/
-│   │   │   ├── MainActivity.kt
-│   │   │   ├── StreamingService.kt
-│   │   │   ├── RtmpStreamer.kt
-│   │   │   └── ServiceDiscovery.kt
-│   │   └── res/
-│   └── build.gradle
-│
-├── pi-gateway/           # Gateway server (Python)
-│   ├── gateway.py        # Main server (HTTP + WebSocket + RTMP processing)
-│   ├── requirements.txt  # Python dependencies
-│   ├── nginx.conf        # nginx-rtmp configuration
-│   └── install_nginx_rtmp.sh
-│
-├── web-client/           # Web viewer (HTML/JS)
-│   ├── index.html        # Main page (served by gateway)
-│   ├── client.js         # WebSocket client + A/V handling
-│   └── style.css
-│
-└── docs/                 # Documentation
-    ├── README.md         # Documentation index
-    ├── quick-start.md    # Getting started guide
-    ├── audio-implementation.md
-    ├── integrated-web-server.md
-    ├── test-streaming.md
-    └── ... (see docs/README.md)
+├── hstreamerAndroid/     # Android application (Kotlin)
+├── frontend/             # Web Client (React, Vite, TypeScript)
+├── backend/              # Gateway Server (Go)
+├── build.gradle.kts      # Root build configuration
+└── settings.gradle.kts   # Project definitions
 ```
 
-## Technology Stack
+## Features
 
-**Android:**
-- Kotlin, MediaProjection API, AudioPlaybackCapture
-- rtmp-rtsp-stream-client-java (RTMP client)
-- Android NSD (mDNS discovery)
+- **Low Latency** - Direct H.264 NAL unit forwarding.
+- **High Performance** - Go backend efficiently handles multiple clients.
+- **Modern Web UI** - React-based interface with connection stats (FPS, Latency).
+- **Auto-Discovery** - mDNS (Zeroconf) support for easy connection.
 
-**Gateway:**
-- Python 3 (asyncio), aiohttp, websockets
-- GStreamer (video/audio processing)
-- nginx-rtmp (RTMP server)
-- zeroconf (mDNS advertisement)
+## Development
 
-**Web Client:**
-- Vanilla JavaScript
-- WebSocket, Canvas API, Web Audio API
-- opus-decoder (audio decoding)
+### Frontend
+```bash
+cd frontend
+npm run dev
+```
 
-## Performance
+### Backend
+```bash
+cd backend
+go run .
+```
 
-| Metric | Typical Value |
-|--------|--------------|
-| Video Latency | 100-200ms |
-| Audio Latency | 40-90ms |
-| Resolution | 720p @ 30fps |
-| Video Bitrate | 2 Mbps |
-| Audio Quality | 48kHz stereo, Opus 128kbps |
-| CPU Usage (Pi 4) | 30-50% |
-
-## URLs and Ports
-
-### Default Configuration
-- **Web Client:** http://gateway-ip:8765/
-- **WebSocket:** ws://gateway-ip:8765/ws
-- **RTMP Server:** rtmp://gateway-ip:1935/live/stream
-- **nginx Stats:** http://gateway-ip:8080/stat
-
-All ports are configurable via command-line arguments.
-
-## Troubleshooting
-
-**Gateway not discovered:**
-- Check devices on same network
-- Verify mDNS not blocked (port 5353 UDP)
-- Check gateway shows "mDNS service registered"
-
-**No video in browser:**
-- Check WebSocket connection status
-- Verify gateway logs show "Pipeline started"
-- Check firewall allows port 8765
-
-**No audio:**
-- Click anywhere on page (browser autoplay policy)
-- Check browser console for "Audio system initialized"
-- Verify AudioContext state is "running"
-
-See [Troubleshooting Guide](docs/troubleshooting.md) for detailed solutions.
-
-## Version History
-
-### Current
-- ✅ RTMP push model (Android → Gateway)
-- ✅ Automatic gateway discovery (mDNS)
-- ✅ Audio streaming (Opus codec)
-- ✅ Integrated HTTP server
-- ✅ Unified port for HTTP + WebSocket
-
-## Contributing
-
-Contributions welcome! This project includes:
-- Android app development (Kotlin)
-- Gateway server (Python, GStreamer)
-- Web client (JavaScript, WebSocket)
-- Documentation improvements
-
-## License
-
-[Your license here]
-
-## Support
-
-- 📖 Read the [docs](docs/)
-- 🐛 Check [Troubleshooting](docs/troubleshooting.md)
-- ❓ Review [Quick Start](docs/quick-start.md)
-
----
-
-**Ready to start?** → [Quick Start Guide](docs/quick-start.md)
+### Android
+Open `hstreamerAndroid` in Android Studio or use Gradle tasks at the root:
+```bash
+./gradlew :hstreamerAndroid:app:assembleDebug
+```

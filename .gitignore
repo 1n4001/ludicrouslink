@@ -41,3 +41,19 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+*.log
+.android-sdk/
+
+/local.properties
+/commandlinetools.zip
+/site
+
+### Secrets & credentials ###
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+*.keystore
+.env
+.env.*

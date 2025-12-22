@@ -1,0 +1,120 @@
+name: HStreamer CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install Dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Upload Frontend Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-dist
+        path: frontend/dist/
+
+  build-backend:
+    needs: build-frontend
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: linux
+            arch: amd64
+            output_name: hstreamer-linux-amd64
+          - os: linux
+            arch: arm64
+            output_name: hstreamer-linux-arm64
+          - os: linux
+            arch: arm
+            output_name: hstreamer-linux-arm
+          - os: windows
+            arch: amd64
+            output_name: hstreamer-windows-amd64.exe
+          - os: windows
+            arch: arm64
+            output_name: hstreamer-windows-arm64.exe
+          - os: darwin
+            arch: arm64
+            output_name: hstreamer-darwin-arm64
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+        cache-dependency-path: backend/go.sum
+
+    - name: Download Frontend Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-dist
+        path: backend/public
+
+    - name: Build Backend
+      env:
+        GOOS: ${{ matrix.os }}
+        GOARCH: ${{ matrix.arch }}
+        GOARM: 7 # Default to ARMv7 for 32-bit ARM
+        CGO_ENABLED: 0
+      run: |
+        cd backend
+        go mod tidy
+        go build -o ../${{ matrix.output_name }} .
+
+    - name: Upload Backend Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.output_name }}
+        path: ${{ matrix.output_name }}
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Android App
+      # We skip the custom setupAndroidSdk task in CI because setup-android handles it better
+      run: ./gradlew :hstreamerAndroid:app:assembleDebug --stacktrace
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: hstreamer-debug
+        path: hstreamerAndroid/app/build/outputs/apk/debug/app-debug.apk

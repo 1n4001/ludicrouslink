@@ -18,6 +18,7 @@ Complete documentation for HStreamer - a low-latency screen and audio streaming 
 
 ### Core Features
 
+- **[video-architecture.md](video-architecture.md)** - Video pipeline architecture: H.264 passthrough vs JPEG modes (NEW)
 - **[audio-implementation.md](audio-implementation.md)** - How audio streaming works (AAC → Opus → Web Audio API)
 - **[integrated-web-server.md](integrated-web-server.md)** - Built-in HTTP server that hosts the web client
 - **[test-streaming.md](test-streaming.md)** - Test the gateway using FFmpeg instead of Android
@@ -76,13 +77,20 @@ Complete documentation for HStreamer - a low-latency screen and audio streaming 
 ### Start Gateway (Default Settings)
 ```bash
 cd pi-gateway
-python3 gateway.py
+python3 gateway.py  # H.264 mode by default
 ```
 Access at: http://gateway-ip:8765/
 
-### Start Gateway (Custom Port)
+### Start Gateway (Custom Settings)
 ```bash
+# Custom port
 python3 gateway.py --http-port 9000
+
+# JPEG fallback mode (for testing or legacy browsers)
+python3 gateway.py --video-mode jpeg
+
+# Full configuration
+python3 gateway.py --http-port 8765 --video-mode h264
 ```
 
 ### Test Without Android
@@ -148,22 +156,38 @@ python3 gateway.py --rtmp-port 1935 --http-port 8765 --http-host 0.0.0.0
 ### Web Browser (Viewer)
 
 **Supported Browsers:**
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
+- Chrome/Edge 94+ (recommended - supports H.264 hardware decode)
+- Firefox 88+ (JPEG fallback mode)
+- Safari 14+ (JPEG fallback mode)
 - Any modern browser with WebSocket and Web Audio API support
 
 ## Performance Characteristics
 
-| Metric | Typical Value | Notes |
-|--------|--------------|-------|
-| Video Latency | 100-200ms | Depends on network and encoding |
+### H.264 Passthrough Mode (Default, Chrome/Edge 94+)
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Video Latency | 80-150ms | Hardware-accelerated decode |
 | Audio Latency | 40-90ms | Lower than video |
-| Video Quality | 720p @ 30fps | Configurable |
-| Video Bitrate | 2 Mbps | Configurable |
+| Video Quality | Native resolution @ 30fps | No forced scaling |
+| Video Bitrate | 1-2 Mbps | Android encoding bitrate |
 | Audio Quality | 48kHz stereo | Opus @ 128kbps |
-| CPU Usage (Pi 4) | 30-50% | GStreamer transcoding |
-| Network Bandwidth | ~2-3 Mbps | Per stream |
+| CPU Usage (Pi 4) | **5-10%** | 85% reduction vs JPEG |
+| Browser CPU | <1% | GPU hardware decode |
+| Network Bandwidth | 1-2 Mbps | Per stream |
+
+### JPEG Fallback Mode (Firefox, Safari)
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Video Latency | 100-200ms | Software decode + JPEG encode |
+| Audio Latency | 40-90ms | Lower than video |
+| Video Quality | 720p @ 30fps | Fixed scaling |
+| Video Bitrate | 1-2 Mbps | JPEG compression |
+| Audio Quality | 48kHz stereo | Opus @ 128kbps |
+| CPU Usage (Pi 4) | 45-65% | GStreamer software processing |
+| Browser CPU | 5-15% | JPEG decode |
+| Network Bandwidth | 1-2 Mbps | Per stream |
 
 ## Support and Contribution
 

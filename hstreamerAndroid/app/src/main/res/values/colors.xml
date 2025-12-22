@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background / Surfaces -->
+    <color name="bg">#FF0A0A0A</color>
+    <color name="surface">#FF1A1A1A</color>
+    <color name="surface_elevated">#FF222222</color>
+    <color name="border">#FF2A2A2A</color>
+
+    <!-- Accent (Indigo) -->
+    <color name="accent">#FF6366F1</color>
+    <color name="accent_hover">#FF818CF8</color>
+
+    <!-- Text -->
+    <color name="text_primary">#EBFFFFFF</color>
+    <color name="text_secondary">#80FFFFFF</color>
+
+    <!-- Status -->
+    <color name="green">#FF22C55E</color>
+    <color name="amber">#FFF59E0B</color>
+    <color name="red">#FFEF4444</color>
+
+    <!-- Log -->
+    <color name="log_text">#FF4ADE80</color>
+
+    <!-- Legacy (kept for compatibility) -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

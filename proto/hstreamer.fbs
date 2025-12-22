@@ -1,0 +1,43 @@
+// HStreamer WebSocket Protocol Schema
+// 
+// ServerMessage: sent from backend → browser (video frames, codec info)
+// ClientMessage: sent from browser → backend (touch input, future controls)
+
+namespace hstreamer;
+
+// ─── Server → Client ───────────────────────────────────
+
+table CodecInfo {
+  sps: [ubyte];      // Raw SPS bytes
+  pps: [ubyte];      // Raw PPS bytes
+}
+
+table VideoFrame {
+  data: [ubyte];     // Raw H.264 NAL units
+  key_frame: bool;
+  timestamp: uint64; // Presentation timestamp (microseconds)
+}
+
+union ServerPayload { CodecInfo, VideoFrame, TouchEvent }
+
+table ServerMessage {
+  payload: ServerPayload;
+}
+
+// ─── Client → Server ───────────────────────────────────
+
+enum TouchAction : byte { Down = 0, Move = 1, Up = 2, Cancel = 3 }
+
+table TouchEvent {
+  action: TouchAction;
+  pointer_id: ubyte;
+  x: float;          // 0.0–1.0 normalized
+  y: float;          // 0.0–1.0 normalized
+  pressure: float;   // 0.0–1.0
+}
+
+union ClientPayload { TouchEvent, CodecInfo, VideoFrame }
+
+table ClientMessage {
+  payload: ClientPayload;
+}

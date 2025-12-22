@@ -49,6 +49,57 @@ python3 gateway.py --help
 - `--http-host`: HTTP/WebSocket host (default: 0.0.0.0)
 - `--http-port`: HTTP/WebSocket port (default: 8765, less common than 8080)
 - `--name`: Service name for mDNS discovery (default: "HStreamer Gateway")
+- `--video-mode`: Video encoding mode - `h264` (browser-side decode, low CPU) or `jpeg` (gateway-side decode, legacy) (default: h264)
+
+### Video Modes
+
+The gateway supports two video processing modes:
+
+#### H.264 Passthrough Mode (Default, Recommended)
+
+**Command:**
+```bash
+python3 gateway.py --video-mode h264
+```
+
+**Benefits:**
+- **85% lower gateway CPU** (5-10% vs 45-65%)
+- Hardware-accelerated browser decoding (GPU)
+- Native resolution support (no forced scaling)
+- Better video quality (no JPEG compression)
+- Lower bandwidth usage
+
+**Requirements:**
+- Chrome 94+, Edge 94+, or Opera 80+
+- Browser with WebCodecs API support
+
+**How it works:**
+The gateway passes raw H.264 NAL units directly to the browser without decoding or re-encoding. The browser's VideoDecoder API uses GPU hardware acceleration for decoding, resulting in minimal CPU usage on both gateway and client.
+
+#### JPEG Fallback Mode (Legacy)
+
+**Command:**
+```bash
+python3 gateway.py --video-mode jpeg
+```
+
+**Benefits:**
+- Works on all browsers (Firefox, Safari, etc.)
+- Predictable behavior
+- No special browser requirements
+
+**Tradeoffs:**
+- High gateway CPU (45-65%)
+- Fixed 720p resolution
+- JPEG compression artifacts
+- Higher latency
+
+**How it works:**
+The gateway decodes H.264, converts color space, scales to 720p, and encodes to JPEG before sending to clients. This works everywhere but uses significant CPU resources.
+
+**Recommendation:** Use H.264 mode (default) for best performance. The web client automatically falls back to JPEG if the browser doesn't support WebCodecs.
+
+For detailed information, see [Video Architecture](video-architecture.md).
 
 ## Usage
 
@@ -74,10 +125,12 @@ RTMP Server Port: 1935
 HTTP Server: http://0.0.0.0:8765
 WebSocket: ws://0.0.0.0:8765/ws
 Service Name: HStreamer Gateway
+Video Mode: H264 (browser-side decode)
 Features: Video + Audio streaming, Web UI
 ============================================================
 mDNS service registered: HStreamer Gateway at 192.168.x.x:1935
 GStreamer RTMP receiver started
+Using H.264 passthrough mode (browser-side decoding)
 HTTP server started on http://0.0.0.0:8765
 WebSocket available at ws://0.0.0.0:8765/ws
 Web client available at http://0.0.0.0:8765/

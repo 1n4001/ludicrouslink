@@ -1,0 +1,162 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install Dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Upload Frontend Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-dist
+        path: frontend/dist/
+
+  build-backend:
+    needs: build-frontend
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: linux
+            arch: amd64
+            output_name: hstreamer-linux-amd64
+          - os: linux
+            arch: arm64
+            output_name: hstreamer-linux-arm64
+          - os: linux
+            arch: arm
+            output_name: hstreamer-linux-arm
+          - os: windows
+            arch: amd64
+            output_name: hstreamer-windows-amd64.exe
+          - os: windows
+            arch: arm64
+            output_name: hstreamer-windows-arm64.exe
+          - os: darwin
+            arch: arm64
+            output_name: hstreamer-darwin-arm64
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+        cache-dependency-path: backend/go.sum
+
+    - name: Download Frontend Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-dist
+        path: backend/public
+
+    - name: Build Backend
+      env:
+        GOOS: ${{ matrix.os }}
+        GOARCH: ${{ matrix.arch }}
+        GOARM: 7
+        CGO_ENABLED: 0
+      run: |
+        cd backend
+        go mod tidy
+        go build -ldflags="-s -w" -o ../${{ matrix.output_name }} .
+
+    - name: Upload Backend Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.output_name }}
+        path: ${{ matrix.output_name }}
+
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Android App
+      run: ./gradlew :hstreamerAndroid:app:assembleDebug --stacktrace
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: hstreamer-debug.apk
+        path: hstreamerAndroid/app/build/outputs/apk/debug/app-debug.apk
+
+  release:
+    needs: [build-backend, build-android]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release-assets
+
+    - name: Prepare Release Assets
+      run: |
+        mkdir -p release
+        # Backend binaries
+        cp release-assets/hstreamer-linux-amd64/hstreamer-linux-amd64 release/
+        cp release-assets/hstreamer-linux-arm64/hstreamer-linux-arm64 release/
+        cp release-assets/hstreamer-linux-arm/hstreamer-linux-arm release/
+        cp release-assets/hstreamer-windows-amd64.exe/hstreamer-windows-amd64.exe release/
+        cp release-assets/hstreamer-windows-arm64.exe/hstreamer-windows-arm64.exe release/
+        cp release-assets/hstreamer-darwin-arm64/hstreamer-darwin-arm64 release/
+        # Android APK
+        cp release-assets/hstreamer-debug.apk/app-debug.apk release/hstreamer-debug.apk
+        # Frontend dist as zip
+        cd release-assets/frontend-dist && zip -r ../../release/frontend-dist.zip . && cd ../..
+        ls -la release/
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        generate_release_notes: true
+        files: |
+          release/hstreamer-linux-amd64
+          release/hstreamer-linux-arm64
+          release/hstreamer-linux-arm
+          release/hstreamer-windows-amd64.exe
+          release/hstreamer-windows-arm64.exe
+          release/hstreamer-darwin-arm64
+          release/hstreamer-debug.apk
+          release/frontend-dist.zip

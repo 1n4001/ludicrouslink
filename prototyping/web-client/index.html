@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HStreamer - Web Client</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="control-panel">
+            <div class="connection-settings">
+                <label for="wsUrl">Gateway WebSocket URL:</label>
+                <input
+                    type="text"
+                    id="wsUrl"
+                    value="ws://localhost:8765/ws"
+                    placeholder="ws://raspberry-pi-ip:8765/ws">
+
+                <button id="btnConnect" class="btn btn-primary">Connect</button>
+                <button id="btnDisconnect" class="btn btn-secondary" disabled>Disconnect</button>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="label">Status:</span>
+                    <span id="statusText" class="status-value">Disconnected</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">FPS:</span>
+                    <span id="fpsText" class="status-value">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Latency:</span>
+                    <span id="latencyText" class="status-value">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <canvas id="videoCanvas"></canvas>
+            <div id="noSignal" class="no-signal">
+                <div class="no-signal-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="96px" height="96px" fill-rule="evenodd" clip-rule="evenodd">
+                        <path fill="currentColor" fill-rule="evenodd" d="M5.271,10.155c4.896-1.983,12.974-2.241,16.483-2.109l2.246,2.884l2.247-2.884c3.509-0.132,11.587,0.125,16.482,2.109c-0.676,1.284-3.617,3.11-5.233,3.516c-0.092-2.523-3.658-3.049-7.079-3.049L23.999,45.04l-6.417-34.419c-3.425,0-6.991,0.526-7.083,3.049C8.885,13.265,5.946,11.439,5.271,10.155L5.271,10.155z" clip-rule="evenodd"/>
+                        <path fill="currentColor" fill-rule="evenodd" d="M3,6.734l1.253,1.839C9.006,6.905,14.647,6.103,20.6,5.923c2.253-0.069,4.547-0.069,6.798,0c5.953,0.179,11.595,0.981,16.348,2.65L45,6.734c-5.613-1.902-11.577-2.536-17.532-2.69c-2.307-0.059-4.63-0.059-6.933,0C14.575,4.198,8.614,4.832,3,6.734L3,6.734z" clip-rule="evenodd"/>
+                    </svg>
+                    <p>No Signal</p>
+                    <small>Connect to gateway to start streaming</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="btnFullscreen" class="btn btn-control">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                </svg>
+                Fullscreen
+            </button>
+            <button id="btnScreenshot" class="btn btn-control">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                Screenshot
+            </button>
+        </div>
+    </div>
+
+    <script src="opus-decoder.min.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
