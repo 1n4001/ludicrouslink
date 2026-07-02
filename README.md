@@ -45,13 +45,13 @@ graph LR
         Screen[Screen Capture<br/>H.264] -- "TCP Stream (MPEG-TS)" --> MPEGTS
     end
 
-    subgraph Backend [Gateway Server (Go)]
+    subgraph Backend ["Gateway Server (Go)"]
         MPEGTS[MPEG-TS Parser] -- "Extract NALUs" --> Hub
         Hub[WebSocket Hub]
         HTTPServer[HTTP Server]
     end
 
-    subgraph Frontend [Web Client (React)]
+    subgraph Frontend ["Web Client (React)"]
         HTTPServer -. "HTTP (Serve App)" .-> React[React App]
         Hub -- "WebSocket (H.264 Frames)" --> Decoder[WebCodecs API]
         Decoder -- "Render" --> Canvas[Canvas]
