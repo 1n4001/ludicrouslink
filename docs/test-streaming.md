@@ -1,6 +1,6 @@
 # Test Streaming with FFmpeg
 
-This guide shows how to test the HStreamer gateway using FFmpeg instead of an Android device.
+This guide shows how to test the LudicrousLink gateway using FFmpeg instead of an Android device.
 
 ## Option 1: Generate Test Video with FFmpeg
 
@@ -36,7 +36,7 @@ ffmpeg -f lavfi -i testsrc=duration=60:size=1280x720:rate=30 \
 ```bash
 ffmpeg -f lavfi -i testsrc=duration=30:size=1280x720:rate=30 \
        -f lavfi -i sine=frequency=440:duration=30 \
-       -vf "drawtext=text='HStreamer Test':fontsize=60:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2" \
+       -vf "drawtext=text='LudicrousLink Test':fontsize=60:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2" \
        -c:v libx264 -preset ultrafast -tune zerolatency \
        -c:a aac -b:a 128k \
        test_video_text.mp4
@@ -352,4 +352,4 @@ Testing with FFmpeg is perfect for:
 - ✅ Performance benchmarking
 - ✅ Automated testing in CI/CD
 
-Now you can test the complete HStreamer pipeline without needing an Android device!
+Now you can test the complete LudicrousLink pipeline without needing an Android device!

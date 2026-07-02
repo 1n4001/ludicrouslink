@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer.ui.theme
+package com.cesicorp.ludicrouslink.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

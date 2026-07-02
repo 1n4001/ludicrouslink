@@ -1,11 +1,11 @@
 # Android App
 
-The `hstreamerAndroid` module is a native Kotlin Android application responsible for screen capture and streaming.
+The `ludicrouslinkAndroid` module is a native Kotlin Android application responsible for screen capture and streaming.
 
 ## Source Structure
 
 ```
-hstreamerAndroid/app/src/main/java/com/cesicorp/hstreamer/
+ludicrouslinkAndroid/app/src/main/java/com/cesicorp/ludicrouslink/
 ├── MainActivity.kt          # UI and permission handling
 ├── ScreenService.kt         # Foreground service for screen capture
 ├── MediaCodecStreamer.kt     # H.264 encoding and MPEG-TS muxing
@@ -41,12 +41,12 @@ The app uses Android's `MediaProjection` API to capture the screen. This require
 === "Gradle (from root)"
 
     ```bash
-    ./gradlew :hstreamerAndroid:app:assembleDebug
+    ./gradlew :ludicrouslinkAndroid:app:assembleDebug
     ```
 
 === "Android Studio"
 
-    Open the `hstreamerAndroid/` directory in Android Studio and use the standard build/run workflow.
+    Open the `ludicrouslinkAndroid/` directory in Android Studio and use the standard build/run workflow.
 
 ## Key Dependencies
 

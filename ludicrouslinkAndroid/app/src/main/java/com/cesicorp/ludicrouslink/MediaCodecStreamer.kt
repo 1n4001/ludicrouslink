@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.content.Intent
 import android.media.MediaCodec
@@ -119,7 +119,7 @@ class MediaCodecStreamer(
 
             // Create virtual display (screen capture → encoder surface)
             virtualDisplay = mediaProjection?.createVirtualDisplay(
-                "HStreamer",
+                "LudicrousLink",
                 width,
                 height,
                 1,  // DPI (doesn't matter for encoding)

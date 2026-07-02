@@ -1,6 +1,6 @@
 # CI/CD
 
-HStreamer uses **GitHub Actions** for continuous integration. The workflow runs on every push to `main` and on pull requests.
+LudicrousLink uses **GitHub Actions** for continuous integration. The workflow runs on every push to `main` and on pull requests.
 
 ## Workflow Overview
 
@@ -44,12 +44,12 @@ Runs as a **matrix build** producing binaries for multiple platforms:
 
 | Target | GOOS | GOARCH | Output |
 |--------|------|--------|--------|
-| Linux x64 | `linux` | `amd64` | `hstreamer-linux-amd64` |
-| Linux ARM64 | `linux` | `arm64` | `hstreamer-linux-arm64` |
-| Linux ARM | `linux` | `arm` | `hstreamer-linux-arm` |
-| Windows x64 | `windows` | `amd64` | `hstreamer-windows-amd64.exe` |
-| Windows ARM64 | `windows` | `arm64` | `hstreamer-windows-arm64.exe` |
-| macOS ARM | `darwin` | `arm64` | `hstreamer-darwin-arm64` |
+| Linux x64 | `linux` | `amd64` | `ludicrouslink-linux-amd64` |
+| Linux ARM64 | `linux` | `arm64` | `ludicrouslink-linux-arm64` |
+| Linux ARM | `linux` | `arm` | `ludicrouslink-linux-arm` |
+| Windows x64 | `windows` | `amd64` | `ludicrouslink-windows-amd64.exe` |
+| Windows ARM64 | `windows` | `arm64` | `ludicrouslink-windows-arm64.exe` |
+| macOS ARM | `darwin` | `arm64` | `ludicrouslink-darwin-arm64` |
 
 Steps:
 
@@ -71,7 +71,7 @@ Steps:
 
 1. Checkout code.
 2. Setup JDK and Android SDK.
-3. `./gradlew :hstreamerAndroid:app:assembleDebug`
+3. `./gradlew :ludicrouslinkAndroid:app:assembleDebug`
 4. Upload APK as an artifact.
 
 ## Artifacts
@@ -79,10 +79,10 @@ Steps:
 After a successful run, the following artifacts are downloadable from the GitHub Actions UI:
 
 - `frontend-dist` — Compiled React app
-- `hstreamer-linux-amd64` — Linux x64 binary
-- `hstreamer-linux-arm64` — Linux ARM64 binary
-- `hstreamer-linux-arm` — Linux ARM binary
-- `hstreamer-windows-amd64.exe` — Windows x64 binary
-- `hstreamer-windows-arm64.exe` — Windows ARM64 binary
-- `hstreamer-darwin-arm64` — macOS ARM binary
-- `hstreamer-debug` — Android debug APK
+- `ludicrouslink-linux-amd64` — Linux x64 binary
+- `ludicrouslink-linux-arm64` — Linux ARM64 binary
+- `ludicrouslink-linux-arm` — Linux ARM binary
+- `ludicrouslink-windows-amd64.exe` — Windows x64 binary
+- `ludicrouslink-windows-arm64.exe` — Windows ARM64 binary
+- `ludicrouslink-darwin-arm64` — macOS ARM binary
+- `ludicrouslink-debug` — Android debug APK

@@ -1,12 +1,12 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.GestureDescription
 import android.graphics.Path
 import android.view.accessibility.AccessibilityEvent
 import android.util.Log
-import hstreamer.TouchAction
-import hstreamer.TouchEvent
+import ludicrouslink.TouchAction
+import ludicrouslink.TouchEvent
 
 class TouchInjectionService : AccessibilityService() {
 

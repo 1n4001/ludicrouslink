@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HStreamer</string>
+    <string name="app_name">LudicrousLink</string>
     <string name="accessibility_service_description">Allows remote control of the device via
-        HStreamer.</string>
+        LudicrousLink.</string>
 </resources>

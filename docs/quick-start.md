@@ -1,8 +1,8 @@
-# HStreamer Quick Start Guide
+# LudicrousLink Quick Start Guide
 
-## What is HStreamer?
+## What is LudicrousLink?
 
-HStreamer is a low-latency screen and audio streaming system that lets you stream your Android device's screen and internal audio to a web browser over your local network.
+LudicrousLink is a low-latency screen and audio streaming system that lets you stream your Android device's screen and internal audio to a web browser over your local network.
 
 **Features:**
 - Real-time screen streaming (720p @ 30fps)
@@ -90,15 +90,15 @@ python3 gateway.py
 **You should see:**
 ```
 ============================================================
-HStreamer Gateway v2 - Starting
+LudicrousLink Gateway v2 - Starting
 ============================================================
 RTMP Server Port: 1935
 HTTP Server: http://0.0.0.0:8765
 WebSocket: ws://0.0.0.0:8765/ws
-Service Name: HStreamer Gateway
+Service Name: LudicrousLink Gateway
 Features: Video + Audio streaming, Web UI
 ============================================================
-mDNS service registered: HStreamer Gateway at 192.168.1.100:1935
+mDNS service registered: LudicrousLink Gateway at 192.168.1.100:1935
 GStreamer RTMP receiver started
 HTTP server started on http://0.0.0.0:8765
 WebSocket available at ws://0.0.0.0:8765/ws
@@ -110,7 +110,7 @@ Waiting for RTMP stream...
 
 ### Step 2: Start Android Streaming
 
-1. Open HStreamer app on Android
+1. Open LudicrousLink app on Android
 2. Grant permissions:
    - Media projection (screen capture)
    - Audio recording (internal audio)
@@ -179,10 +179,10 @@ Click the **"Screenshot"** button to capture the current frame as a JPEG.
 
 On Android:
 1. Pull down notification shade
-2. Tap "Stop Streaming" on the HStreamer notification
+2. Tap "Stop Streaming" on the LudicrousLink notification
 
 Or from the app:
-1. Open HStreamer app
+1. Open LudicrousLink app
 2. Tap "Stop Streaming"
 
 ## Troubleshooting
@@ -250,7 +250,7 @@ python3 gateway.py
 
 **Fix:**
 ```bash
-# Disable battery optimization for HStreamer app on Android
+# Disable battery optimization for LudicrousLink app on Android
 # Use wired Ethernet on Raspberry Pi
 # Check for network interference
 ```
@@ -264,22 +264,22 @@ python3 gateway.py
 hostname -I
 
 # Or check mDNS
-avahi-browse -rt _hstreamer._tcp
+avahi-browse -rt _ludicrouslink._tcp
 ```
 
 ### Running Gateway as Service
 
-Create `/etc/systemd/system/hstreamer.service`:
+Create `/etc/systemd/system/ludicrouslink.service`:
 
 ```ini
 [Unit]
-Description=HStreamer Gateway
+Description=LudicrousLink Gateway
 After=network.target nginx.service
 
 [Service]
 Type=simple
 User=pi
-WorkingDirectory=/home/pi/hstreamer/pi-gateway
+WorkingDirectory=/home/pi/ludicrouslink/pi-gateway
 ExecStart=/usr/bin/python3 gateway.py
 Restart=always
 
@@ -289,8 +289,8 @@ WantedBy=multi-user.target
 
 Enable and start:
 ```bash
-sudo systemctl enable hstreamer
-sudo systemctl start hstreamer
+sudo systemctl enable ludicrouslink
+sudo systemctl start ludicrouslink
 ```
 
 ### Remote Access (Advanced)
@@ -323,7 +323,7 @@ http://localhost:8765/
 - Close background apps
 - Use high-performance mode
 - Keep device charging during long streams
-- Disable battery optimization for HStreamer
+- Disable battery optimization for LudicrousLink
 
 ## Advanced Options
 
@@ -366,7 +366,7 @@ sudo tail -f /var/log/nginx/error.log
 
 **Android logs:**
 ```bash
-adb logcat | grep HStreamer
+adb logcat | grep LudicrousLink
 ```
 
 ### Common Log Messages
@@ -393,7 +393,7 @@ Now that you have basic streaming working, you can:
 
 ## Summary
 
-HStreamer provides a complete, low-latency streaming solution with:
+LudicrousLink provides a complete, low-latency streaming solution with:
 - ✅ Automatic discovery
 - ✅ Integrated web interface
 - ✅ Video + audio streaming

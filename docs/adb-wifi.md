@@ -1,6 +1,6 @@
 # ADB over Wi-Fi
 
-This guide covers connecting to your Android device wirelessly, installing the HStreamer APK, and viewing logs.
+This guide covers connecting to your Android device wirelessly, installing the LudicrousLink APK, and viewing logs.
 
 ## Prerequisites
 
@@ -76,13 +76,13 @@ adb devices
 ### From a pre-built APK
 
 ```bash
-adb install path/to/hstreamer-debug.apk
+adb install path/to/ludicrouslink-debug.apk
 ```
 
 ### Build and install with Gradle
 
 ```bash
-./gradlew :hstreamerAndroid:app:installDebug
+./gradlew :ludicrouslinkAndroid:app:installDebug
 ```
 
 This builds the APK and installs it on the connected device in one step.
@@ -91,7 +91,7 @@ This builds the APK and installs it on the connected device in one step.
 
 ## Viewing Logs
 
-### All HStreamer logs
+### All LudicrousLink logs
 
 ```bash
 adb logcat -s MainActivity:* MediaCodecStreamer:* DisplayService:*
@@ -116,12 +116,12 @@ adb logcat *:E
 ### Save logs to a file
 
 ```bash
-adb logcat -s MainActivity:* MediaCodecStreamer:* > hstreamer.log
+adb logcat -s MainActivity:* MediaCodecStreamer:* > ludicrouslink.log
 ```
 
 ### In-App Log Window
 
-The HStreamer Android app includes a built-in log window at the bottom of the screen that shows connection events, encoder status, and errors in real-time — no ADB required.
+The LudicrousLink Android app includes a built-in log window at the bottom of the screen that shows connection events, encoder status, and errors in real-time — no ADB required.
 
 ---
 
@@ -133,4 +133,4 @@ The HStreamer Android app includes a built-in log window at the bottom of the sc
 | `adb connect` refuses | Check the port — it changes each time wireless debugging is re-enabled |
 | `device unauthorized` | Check the device for an authorization dialog and tap **Allow** |
 | Connection drops | Wi-Fi may have switched — re-run `adb connect` |
-| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Uninstall the old version first: `adb uninstall com.cesicorp.hstreamer` |
+| `INSTALL_FAILED_UPDATE_INCOMPATIBLE` | Uninstall the old version first: `adb uninstall com.cesicorp.ludicrouslink` |

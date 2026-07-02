@@ -59,16 +59,16 @@ The server expects a `./public` directory for static frontend files. During deve
 
 ## Android Development
 
-Open `hstreamerAndroid/` in Android Studio for the best development experience.
+Open `ludicrouslinkAndroid/` in Android Studio for the best development experience.
 
 Alternatively, use Gradle from the root:
 
 ```bash
 # Build debug APK
-./gradlew :hstreamerAndroid:app:assembleDebug
+./gradlew :ludicrouslinkAndroid:app:assembleDebug
 
 # Install on connected device
-./gradlew :hstreamerAndroid:app:installDebug
+./gradlew :ludicrouslinkAndroid:app:installDebug
 ```
 
 ## Full Stack (Gradle)

@@ -1,7 +1,7 @@
 # Audio Implementation Summary
 
 ## Overview
-Added complete audio support to HStreamer v2, enabling real-time audio streaming alongside video from Android devices to web browsers.
+Added complete audio support to LudicrousLink v2, enabling real-time audio streaming alongside video from Android devices to web browsers.
 
 ## What Changed
 
@@ -66,14 +66,14 @@ python3 gateway.py
 Expected output:
 ```
 ============================================================
-HStreamer Gateway v2 - Starting
+LudicrousLink Gateway v2 - Starting
 ============================================================
 RTMP Server Port: 1935
 WebSocket Server: ws://0.0.0.0:8765
-Service Name: HStreamer Gateway
+Service Name: LudicrousLink Gateway
 Features: Video + Audio streaming
 ============================================================
-mDNS service registered: HStreamer Gateway at 192.168.x.x:1935
+mDNS service registered: LudicrousLink Gateway at 192.168.x.x:1935
 GStreamer RTMP receiver started
 WebSocket server started on ws://0.0.0.0:8765
 Video frame broadcaster started
@@ -81,7 +81,7 @@ Audio broadcaster started
 ```
 
 ### 2. Start Android App
-1. Open HStreamer app on Android
+1. Open LudicrousLink app on Android
 2. Wait for gateway to appear in the dropdown
 3. Select the gateway
 4. Tap "Start Streaming"

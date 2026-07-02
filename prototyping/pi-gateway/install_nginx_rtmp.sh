@@ -1,5 +1,5 @@
 #!/bin/bash
-# Install and configure nginx-rtmp for HStreamer Gateway
+# Install and configure nginx-rtmp for LudicrousLink Gateway
 
 set -e  # Exit on error
 
@@ -72,7 +72,7 @@ fi
 
 # Write nginx configuration
 sudo tee /etc/nginx/nginx.conf > /dev/null <<'EOF'
-# HStreamer Gateway - nginx with RTMP
+# LudicrousLink Gateway - nginx with RTMP
 
 user www-data;
 worker_processes auto;
@@ -142,7 +142,7 @@ http {
 
         # Simple status page
         location / {
-            return 200 "HStreamer Gateway RTMP Server\nStatus: Running\nRTMP Port: 1935\n";
+            return 200 "LudicrousLink Gateway RTMP Server\nStatus: Running\nRTMP Port: 1935\n";
             add_header Content-Type text/plain;
         }
     }

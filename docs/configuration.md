@@ -37,7 +37,7 @@ The backend server is configured via command-line flags. All settings have sensi
 ### Full Configuration
 
 ```bash
-./backend -http 443 -tcp 9000 -cert /etc/ssl/certs/hstreamer.crt -key /etc/ssl/private/hstreamer.key
+./backend -http 443 -tcp 9000 -cert /etc/ssl/certs/ludicrouslink.crt -key /etc/ssl/private/ludicrouslink.key
 ```
 
 ## TLS Details
@@ -72,5 +72,5 @@ Then run:
 The backend automatically advertises itself via mDNS (Zeroconf):
 
 - **Service type**: `_http._tcp`
-- **Instance name**: `HStreamer Gateway`
+- **Instance name**: `LudicrousLink Gateway`
 - **Port**: Uses the value of the `-http` flag.

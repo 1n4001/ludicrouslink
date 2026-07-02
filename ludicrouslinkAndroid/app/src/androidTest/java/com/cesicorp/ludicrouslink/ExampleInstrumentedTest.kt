@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.cesicorp.hstreamer", appContext.packageName)
+        assertEquals("com.cesicorp.ludicrouslink", appContext.packageName)
     }
 }

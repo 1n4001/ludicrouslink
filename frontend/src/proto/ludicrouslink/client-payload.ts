@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, @typescript-eslint/no-non-null-assertion */
 
-import { TouchEvent } from '../hstreamer/touch-event.js';
+import { TouchEvent } from '../ludicrouslink/touch-event.js';
 
 
 export enum ClientPayload {

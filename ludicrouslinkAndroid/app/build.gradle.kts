@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cesicorp.hstreamer"
+    namespace = "com.cesicorp.ludicrouslink"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.cesicorp.hstreamer"
+        applicationId = "com.cesicorp.ludicrouslink"
         minSdk = 31
         targetSdk = 36
         versionCode = 1

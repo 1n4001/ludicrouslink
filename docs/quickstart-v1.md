@@ -1,6 +1,6 @@
-# HStreamer Quick Start Guide
+# LudicrousLink Quick Start Guide
 
-Get up and running with HStreamer in 5 minutes!
+Get up and running with LudicrousLink in 5 minutes!
 
 ## Prerequisites Checklist
 
@@ -40,7 +40,7 @@ cd pi-gateway
 ### 3. Start Streaming (1 minute)
 
 **On Android:**
-1. Open HStreamer app
+1. Open LudicrousLink app
 2. Tap "Start Streaming"
 3. Grant permissions
 4. Note your IP (e.g., 192.168.1.100)
@@ -100,7 +100,7 @@ curl -i -N -H "Connection: Upgrade" -H "Upgrade: websocket" \
 
 **Android:**
 - Settings → About Phone → Status → IP Address
-- Or check in HStreamer app UI
+- Or check in LudicrousLink app UI
 
 **Raspberry Pi:**
 ```bash
@@ -117,10 +117,10 @@ hostname -I
 
 ```bash
 # Check if app is running
-adb shell ps | grep hstreamer
+adb shell ps | grep ludicrouslink
 
 # View logs
-adb logcat | grep HStreamer
+adb logcat | grep LudicrousLink
 
 # Get device IP
 adb shell ip addr show wlan0
@@ -205,4 +205,4 @@ After setup, you should have:
 - [ ] Browser showing FPS > 20 and Latency < 500ms
 - [ ] Smooth video playback with no major stuttering
 
-Congratulations! Your HStreamer system is now operational. 🎉
+Congratulations! Your LudicrousLink system is now operational. 🎉

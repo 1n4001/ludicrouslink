@@ -5,7 +5,7 @@
 
 import * as flatbuffers from 'flatbuffers';
 
-import { ClientPayload, unionToClientPayload, unionListToClientPayload } from '../hstreamer/client-payload.js';
+import { ClientPayload, unionToClientPayload, unionListToClientPayload } from '../ludicrouslink/client-payload.js';
 
 
 export class ClientMessage {

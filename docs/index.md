@@ -1,12 +1,12 @@
-# HStreamer
+# LudicrousLink
 
 **Low-Latency Android Screen Streaming**
 
-[![HStreamer CI](https://github.com/1n4001/hstreamer/actions/workflows/ci.yml/badge.svg)](https://github.com/1n4001/hstreamer/actions/workflows/ci.yml)
+[![LudicrousLink CI](https://github.com/1n4001/ludicrouslink/actions/workflows/ci.yml/badge.svg)](https://github.com/1n4001/ludicrouslink/actions/workflows/ci.yml)
 
 ---
 
-HStreamer is a complete system for real-time screen streaming from Android devices to web browsers over a local network. It captures the screen on Android, encodes it as H.264 via MPEG-TS, and streams it over TCP to a Go backend, which then broadcasts individual H.264 frames to connected browser clients over WebSocket.
+LudicrousLink is a complete system for real-time screen streaming from Android devices to web browsers over a local network. It captures the screen on Android, encodes it as H.264 via MPEG-TS, and streams it over TCP to a Go backend, which then broadcasts individual H.264 frames to connected browser clients over WebSocket.
 
 ## Key Features
 
@@ -20,8 +20,8 @@ HStreamer is a complete system for real-time screen streaming from Android devic
 ## Project Structure
 
 ```
-hstreamer/
-├── hstreamerAndroid/     # Android screen capture app (Kotlin)
+ludicrouslink/
+├── ludicrouslinkAndroid/     # Android screen capture app (Kotlin)
 ├── backend/              # Gateway server (Go)
 ├── frontend/             # Web client (React + Vite + TypeScript)
 ├── docs/                 # This documentation (MkDocs)

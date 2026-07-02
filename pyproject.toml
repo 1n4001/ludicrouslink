@@ -1,7 +1,7 @@
 [project]
-name = "hstreamer-docs"
+name = "ludicrouslink-docs"
 version = "1.0.0"
-description = "Documentation for HStreamer"
+description = "Documentation for LudicrousLink"
 requires-python = ">=3.10"
 
 [project.optional-dependencies]

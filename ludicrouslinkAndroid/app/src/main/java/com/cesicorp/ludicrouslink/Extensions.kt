@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.app.Activity
 import android.app.Service

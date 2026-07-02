@@ -77,7 +77,7 @@ tasks.register("setupAndroidSdk") {
             println("Created local.properties pointing to ${sdkDir.absolutePath}")
         }
         
-        // 4. Install Packages matches hstreamerAndroid/app/build.gradle.kts
+        // 4. Install Packages matches ludicrouslinkAndroid/app/build.gradle.kts
         val platformDir = File(sdkDir, "platforms/android-36")
         val buildToolsDir = File(sdkDir, "build-tools/35.0.0")
         val platformToolsDir = File(sdkDir, "platform-tools")  // adb lives here
@@ -119,7 +119,7 @@ tasks.register("setupAndroidSdk") {
 tasks.register("buildAll") {
     group = "build"
     description = "Builds everything"
-    dependsOn("setupAndroidSdk", ":frontend:build", ":backend:build", ":hstreamerAndroid:app:assembleDebug")
+    dependsOn("setupAndroidSdk", ":frontend:build", ":backend:build", ":ludicrouslinkAndroid:app:assembleDebug")
 }
 
 tasks.register("runBackend") {

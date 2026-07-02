@@ -37,14 +37,14 @@ func (s *Service) Shutdown() {
 
 // StartDiscovery is a helper to start advertising and keep running until context cancelled
 func StartDiscovery(ctx context.Context, port int) {
-	service, err := NewService("HStreamer Gateway", port)
+	service, err := NewService("LudicrousLink Gateway", port)
 	if err != nil {
 		log.Printf("Failed to start mDNS service: %v", err)
 		return
 	}
 	defer service.Shutdown()
 	
-	log.Printf("mDNS service started: HStreamer Gateway._http._tcp.local. on port %d", port)
+	log.Printf("mDNS service started: LudicrousLink Gateway._http._tcp.local. on port %d", port)
 
 	<-ctx.Done()
 	log.Println("Stopping mDNS service...")

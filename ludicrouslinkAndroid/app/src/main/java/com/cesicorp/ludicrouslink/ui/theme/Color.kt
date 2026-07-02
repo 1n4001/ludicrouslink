@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer.ui.theme
+package com.cesicorp.ludicrouslink.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

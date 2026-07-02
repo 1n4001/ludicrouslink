@@ -1,6 +1,6 @@
 [Unit]
-Description=HStreamer Gateway Service
-Documentation=https://github.com/your-repo/hstreamer
+Description=LudicrousLink Gateway Service
+Documentation=https://github.com/your-repo/ludicrouslink
 After=network-online.target
 Wants=network-online.target
 
@@ -8,21 +8,21 @@ Wants=network-online.target
 Type=simple
 User=pi
 Group=pi
-WorkingDirectory=/home/pi/hstreamer-gateway
+WorkingDirectory=/home/pi/ludicrouslink-gateway
 Environment="PATH=/usr/local/bin:/usr/bin:/bin"
-ExecStart=/usr/bin/python3 /home/pi/hstreamer-gateway/gateway.py --rtsp-url rtsp://192.168.1.100:8554/live --ws-host 0.0.0.0 --ws-port 8765
+ExecStart=/usr/bin/python3 /home/pi/ludicrouslink-gateway/gateway.py --rtsp-url rtsp://192.168.1.100:8554/live --ws-host 0.0.0.0 --ws-port 8765
 Restart=always
 RestartSec=10
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=hstreamer-gateway
+SyslogIdentifier=ludicrouslink-gateway
 
 # Security hardening
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
-ReadWritePaths=/home/pi/hstreamer-gateway
+ReadWritePaths=/home/pi/ludicrouslink-gateway
 
 [Install]
 WantedBy=multi-user.target

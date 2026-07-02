@@ -1,4 +1,4 @@
-# HStreamer v2 - Push-Based Architecture with Service Discovery
+# LudicrousLink v2 - Push-Based Architecture with Service Discovery
 
 **Major Update:** Android now **pushes** stream TO gateway (instead of gateway pulling FROM Android).
 
@@ -113,13 +113,13 @@ python3 gateway_v2.py \
 
 **Gateway will:**
 1. Start nginx-rtmp RTMP server on port 1935
-2. Advertise as `_hstreamer._tcp.` service via mDNS
+2. Advertise as `_ludicrouslink._tcp.` service via mDNS
 3. Wait for Android to push stream
 4. Start WebSocket server on port 8765
 
 ### Step 2: Launch Android App
 
-1. Open **HStreamer** on Android
+1. Open **LudicrousLink** on Android
 2. App automatically scans for gateways (10 seconds)
 3. Select gateway from dropdown
 4. Tap **"Start Streaming"**
@@ -200,8 +200,8 @@ Android app will show both in the dropdown!
 Gateway uses Zeroconf to advertise:
 
 ```python
-Service Type: _hstreamer._tcp.local.
-Service Name: HStreamer Gateway._hstreamer._tcp.local.
+Service Type: _ludicrouslink._tcp.local.
+Service Name: LudicrousLink Gateway._ludicrouslink._tcp.local.
 Port: 1935
 Properties:
   - version: 2.0
@@ -213,7 +213,7 @@ Properties:
 Android uses Network Service Discovery (NSD):
 
 ```kotlin
-serviceType = "_hstreamer._tcp."
+serviceType = "_ludicrouslink._tcp."
 // Automatically discovers all gateways on network
 // Resolves IP address and port
 // Shows in UI dropdown
@@ -267,10 +267,10 @@ python3 gateway_v2.py --debug
 **Check gateway is advertising:**
 ```bash
 # On Linux/Mac
-avahi-browse -a | grep hstreamer
+avahi-browse -a | grep ludicrouslink
 
 # On Raspberry Pi
-avahi-browse -r _hstreamer._tcp
+avahi-browse -r _ludicrouslink._tcp
 ```
 
 **Verify mDNS/Avahi is running:**
@@ -501,4 +501,4 @@ For questions or issues with v2:
 
 ---
 
-Enjoy the improved HStreamer v2 experience! 🚀
+Enjoy the improved LudicrousLink v2 experience! 🚀

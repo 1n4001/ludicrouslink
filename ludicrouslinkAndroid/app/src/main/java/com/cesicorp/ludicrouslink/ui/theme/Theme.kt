@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer.ui.theme
+package com.cesicorp.ludicrouslink.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -34,7 +34,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun HStreamerTheme(
+fun LudicrousLinkTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

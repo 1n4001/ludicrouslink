@@ -7,7 +7,7 @@ import (
 
 	flatbuffers "github.com/google/flatbuffers/go"
 	"github.com/gorilla/websocket"
-	fb "hstreamer/backend/pkg/proto/hstreamer"
+	fb "ludicrouslink/backend/pkg/proto/ludicrouslink"
 )
 
 // Client represents a connected WebSocket client

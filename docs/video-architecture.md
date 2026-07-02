@@ -2,7 +2,7 @@
 
 ## Overview
 
-HStreamer Gateway v2 implements an optimized video pipeline that dramatically reduces CPU usage by eliminating gateway-side video processing. The gateway now supports two video modes:
+LudicrousLink Gateway v2 implements an optimized video pipeline that dramatically reduces CPU usage by eliminating gateway-side video processing. The gateway now supports two video modes:
 
 1. **H.264 Passthrough Mode** (default) - Browser-side hardware-accelerated decoding
 2. **JPEG Mode** (legacy fallback) - Gateway-side software decoding
@@ -331,7 +331,7 @@ python3 gateway.py \
   --http-host 0.0.0.0 \
   --http-port 8765 \
   --video-mode h264 \
-  --name "HStreamer Gateway"
+  --name "LudicrousLink Gateway"
 ```
 
 ### Client Configuration
@@ -509,4 +509,4 @@ python3 gateway.py --video-mode h264
 ---
 
 **Last Updated:** December 2024
-**HStreamer Version:** v2.1
+**LudicrousLink Version:** v2.1

@@ -15,7 +15,7 @@ val schemaFiles = fileTree(layout.projectDirectory) { include("*.fbs") }
 val goOutDir    = rootProject.layout.projectDirectory.dir("backend/pkg/proto")
 val tsOutDir    = rootProject.layout.projectDirectory.dir("frontend/src/proto")
 val kotlinOutDir = rootProject.layout.projectDirectory.dir(
-    "hstreamerAndroid/app/src/main/java"
+    "ludicrouslinkAndroid/app/src/main/java"
 )
 
 // Download flatc binary matching our runtime library version
@@ -81,7 +81,7 @@ tasks.register<Exec>("flatcKotlin") {
     // Fix version constant if flatc binary is newer than the Maven runtime
     val runtimeConst = "FLATBUFFERS_${flatcVersion.replace('.', '_')}"
     doLast {
-        fileTree(kotlinOutDir) { include("**/hstreamer/*.kt") }.forEach { f ->
+        fileTree(kotlinOutDir) { include("**/ludicrouslink/*.kt") }.forEach { f ->
             val content = f.readText()
             val fixed = content.replace(Regex("""Constants\.FLATBUFFERS_\d+_\d+_\d+"""), "Constants.$runtimeConst")
             if (fixed != content) f.writeText(fixed)

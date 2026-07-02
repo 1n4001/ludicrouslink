@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup script for Raspberry Pi Gateway
 
-echo "HStreamer Gateway Setup"
+echo "LudicrousLink Gateway Setup"
 echo "======================="
 
 # Update system

@@ -1,7 +1,7 @@
-site_name: HStreamer Documentation
+site_name: LudicrousLink Documentation
 site_description: Low-Latency Android Screen Streaming
-repo_url: https://github.com/1n4001/hstreamer
-repo_name: 1n4001/hstreamer
+repo_url: https://github.com/1n4001/ludicrouslink
+repo_name: 1n4001/ludicrouslink
 
 theme:
   name: material

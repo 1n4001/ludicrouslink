@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup script for Raspberry Pi Gateway v2 (RTMP Receiver)
 
-echo "HStreamer Gateway v2 Setup"
+echo "LudicrousLink Gateway v2 Setup"
 echo "=========================="
 echo ""
 

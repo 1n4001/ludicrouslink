@@ -12,9 +12,9 @@ pluginManagement {
     }
 }
 
-rootProject.name = "hstreamer"
+rootProject.name = "ludicrouslink"
 include(":proto")
-include(":hstreamerAndroid")
-include(":hstreamerAndroid:app")
+include(":ludicrouslinkAndroid")
+include(":ludicrouslinkAndroid:app")
 include(":frontend")
 include(":backend")

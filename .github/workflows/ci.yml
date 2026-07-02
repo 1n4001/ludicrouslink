@@ -1,4 +1,4 @@
-name: HStreamer CI
+name: LudicrousLink CI
 
 on:
   push:
@@ -43,22 +43,22 @@ jobs:
         include:
           - os: linux
             arch: amd64
-            output_name: hstreamer-linux-amd64
+            output_name: ludicrouslink-linux-amd64
           - os: linux
             arch: arm64
-            output_name: hstreamer-linux-arm64
+            output_name: ludicrouslink-linux-arm64
           - os: linux
             arch: arm
-            output_name: hstreamer-linux-arm
+            output_name: ludicrouslink-linux-arm
           - os: windows
             arch: amd64
-            output_name: hstreamer-windows-amd64.exe
+            output_name: ludicrouslink-windows-amd64.exe
           - os: windows
             arch: arm64
-            output_name: hstreamer-windows-arm64.exe
+            output_name: ludicrouslink-windows-arm64.exe
           - os: darwin
             arch: arm64
-            output_name: hstreamer-darwin-arm64
+            output_name: ludicrouslink-darwin-arm64
 
     steps:
     - uses: actions/checkout@v4
@@ -111,10 +111,10 @@ jobs:
 
     - name: Build Android App
       # We skip the custom setupAndroidSdk task in CI because setup-android handles it better
-      run: ./gradlew :hstreamerAndroid:app:assembleDebug --stacktrace
+      run: ./gradlew :ludicrouslinkAndroid:app:assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: hstreamer-debug
-        path: hstreamerAndroid/app/build/outputs/apk/debug/app-debug.apk
+        name: ludicrouslink-debug
+        path: ludicrouslinkAndroid/app/build/outputs/apk/debug/app-debug.apk

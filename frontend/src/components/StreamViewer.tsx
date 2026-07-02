@@ -3,7 +3,7 @@ import { H264VideoDecoder } from '../services/H264Decoder';
 import { TinyH264Decoder } from '../services/TinyH264Decoder';
 import { Controls } from './Controls';
 import * as flatbuffers from 'flatbuffers';
-import { ServerMessage, ServerPayload, CodecInfo, VideoFrame } from '../proto/hstreamer';
+import { ServerMessage, ServerPayload, CodecInfo, VideoFrame } from '../proto/ludicrouslink';
 
 export const StreamViewer: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -175,7 +175,7 @@ export const StreamViewer: React.FC = () => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `hstreamer-${Date.now()}.jpg`;
+                a.download = `ludicrouslink-${Date.now()}.jpg`;
                 a.click();
                 URL.revokeObjectURL(url);
             }, 'image/jpeg', 0.95);

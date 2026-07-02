@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-HStreamer is a low-latency screen and audio streaming system that streams from Android devices to web browsers via a Raspberry Pi gateway. The system uses RTMP push model with mDNS auto-discovery.
+LudicrousLink is a low-latency screen and audio streaming system that streams from Android devices to web browsers via a Raspberry Pi gateway. The system uses RTMP push model with mDNS auto-discovery.
 
 **Architecture:** Android → RTMP → Gateway (nginx-rtmp + GStreamer + Python) → WebSocket → Web Browser
 
@@ -56,7 +56,7 @@ cd android-app
 adb install app/build/outputs/apk/debug/app-debug.apk
 
 # View logs
-adb logcat | grep HStreamer
+adb logcat | grep LudicrousLink
 ```
 
 ### Testing Without Android
@@ -156,11 +156,11 @@ Web Browser (All browsers)
 **Gateway.py integrations:**
 - `GStreamerRTMPReceiver`: Connects to `rtmp://127.0.0.1:1935/live/stream` and processes via GStreamer
 - `WebServer` (aiohttp): Serves HTTP + WebSocket on single port, routes: `/` (index), `/ws` (WebSocket), static files
-- `MdnsService` (zeroconf): Advertises `_hstreamer._tcp.local.` service
+- `MdnsService` (zeroconf): Advertises `_ludicrouslink._tcp.local.` service
 - Frame queues: `frame_queue` (video) and `audio_queue` (audio) bridge GStreamer → WebSocket
 
 **Android integrations:**
-- `ServiceDiscovery`: Uses Android NSD to find `_hstreamer._tcp` services
+- `ServiceDiscovery`: Uses Android NSD to find `_ludicrouslink._tcp` services
 - `RtmpStreamer`: Wraps `rtmp-rtsp-stream-client-java` library for RTMP streaming
 - `StreamingService`: Foreground service manages MediaProjection and RtmpStreamer lifecycle
 

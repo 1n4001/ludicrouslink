@@ -2,7 +2,7 @@
 
 ## System Overview
 
-HStreamer consists of three main components that work together to deliver a real-time screen streaming experience.
+LudicrousLink consists of three main components that work together to deliver a real-time screen streaming experience.
 
 ```mermaid
 graph LR
@@ -58,6 +58,6 @@ sequenceDiagram
 
 | Component | Language | Role |
 |-----------|----------|------|
-| `hstreamerAndroid` | Kotlin | Captures screen via `MediaProjection`, encodes H.264, muxes to MPEG-TS, sends over TCP |
+| `ludicrouslinkAndroid` | Kotlin | Captures screen via `MediaProjection`, encodes H.264, muxes to MPEG-TS, sends over TCP |
 | `backend` | Go | Receives TCP stream, parses MPEG-TS, broadcasts H.264 frames via WebSocket, serves frontend |
 | `frontend` | React/TS | Connects via WebSocket, decodes H.264 with WebCodecs, renders to Canvas |

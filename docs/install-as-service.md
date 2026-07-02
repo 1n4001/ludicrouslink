@@ -1,4 +1,4 @@
-# Installing HStreamer Gateway as System Service
+# Installing LudicrousLink Gateway as System Service
 
 This guide shows how to set up the gateway to start automatically on boot.
 
@@ -11,11 +11,11 @@ This guide shows how to set up the gateway to start automatically on boot.
 
 ### 1. Edit Service File
 
-Edit `hstreamer-gateway.service` and update:
+Edit `ludicrouslink-gateway.service` and update:
 
 ```ini
 # Change the RTSP URL to your Android device IP
-ExecStart=/usr/bin/python3 /home/pi/hstreamer-gateway/gateway.py \
+ExecStart=/usr/bin/python3 /home/pi/ludicrouslink-gateway/gateway.py \
   --rtsp-url rtsp://YOUR_ANDROID_IP:8554/live \
   --ws-host 0.0.0.0 \
   --ws-port 8765
@@ -24,7 +24,7 @@ ExecStart=/usr/bin/python3 /home/pi/hstreamer-gateway/gateway.py \
 ### 2. Copy Service File
 
 ```bash
-sudo cp hstreamer-gateway.service /etc/systemd/system/
+sudo cp ludicrouslink-gateway.service /etc/systemd/system/
 ```
 
 ### 3. Reload Systemd
@@ -36,13 +36,13 @@ sudo systemctl daemon-reload
 ### 4. Enable Service
 
 ```bash
-sudo systemctl enable hstreamer-gateway.service
+sudo systemctl enable ludicrouslink-gateway.service
 ```
 
 ### 5. Start Service
 
 ```bash
-sudo systemctl start hstreamer-gateway.service
+sudo systemctl start ludicrouslink-gateway.service
 ```
 
 ## Managing the Service
@@ -50,13 +50,13 @@ sudo systemctl start hstreamer-gateway.service
 ### Check Status
 
 ```bash
-sudo systemctl status hstreamer-gateway.service
+sudo systemctl status ludicrouslink-gateway.service
 ```
 
 Expected output:
 ```
-● hstreamer-gateway.service - HStreamer Gateway Service
-     Loaded: loaded (/etc/systemd/system/hstreamer-gateway.service; enabled)
+● ludicrouslink-gateway.service - LudicrousLink Gateway Service
+     Loaded: loaded (/etc/systemd/system/ludicrouslink-gateway.service; enabled)
      Active: active (running) since ...
 ```
 
@@ -64,31 +64,31 @@ Expected output:
 
 ```bash
 # Live logs
-sudo journalctl -u hstreamer-gateway.service -f
+sudo journalctl -u ludicrouslink-gateway.service -f
 
 # Recent logs
-sudo journalctl -u hstreamer-gateway.service -n 100
+sudo journalctl -u ludicrouslink-gateway.service -n 100
 
 # Today's logs
-sudo journalctl -u hstreamer-gateway.service --since today
+sudo journalctl -u ludicrouslink-gateway.service --since today
 ```
 
 ### Stop Service
 
 ```bash
-sudo systemctl stop hstreamer-gateway.service
+sudo systemctl stop ludicrouslink-gateway.service
 ```
 
 ### Restart Service
 
 ```bash
-sudo systemctl restart hstreamer-gateway.service
+sudo systemctl restart ludicrouslink-gateway.service
 ```
 
 ### Disable Auto-Start
 
 ```bash
-sudo systemctl disable hstreamer-gateway.service
+sudo systemctl disable ludicrouslink-gateway.service
 ```
 
 ## Troubleshooting
@@ -97,12 +97,12 @@ sudo systemctl disable hstreamer-gateway.service
 
 **Check service status:**
 ```bash
-sudo systemctl status hstreamer-gateway.service
+sudo systemctl status ludicrouslink-gateway.service
 ```
 
 **Check logs:**
 ```bash
-sudo journalctl -u hstreamer-gateway.service -n 50
+sudo journalctl -u ludicrouslink-gateway.service -n 50
 ```
 
 **Common issues:**
@@ -121,7 +121,7 @@ gst-inspect-1.0 rtspsrc
 
 **Test manually:**
 ```bash
-cd /home/pi/hstreamer-gateway
+cd /home/pi/ludicrouslink-gateway
 python3 gateway.py --rtsp-url rtsp://192.168.1.100:8554/live
 ```
 
@@ -134,12 +134,12 @@ pip3 list | grep -E 'websockets|PyGObject'
 
 **View restart count:**
 ```bash
-systemctl show hstreamer-gateway.service | grep NRestarts
+systemctl show ludicrouslink-gateway.service | grep NRestarts
 ```
 
 **Check logs for error patterns:**
 ```bash
-sudo journalctl -u hstreamer-gateway.service | grep -i error
+sudo journalctl -u ludicrouslink-gateway.service | grep -i error
 ```
 
 **Increase restart delay:**
@@ -163,14 +163,14 @@ Create separate service files:
 
 ```bash
 # Copy service file
-sudo cp hstreamer-gateway.service hstreamer-gateway@device1.service
+sudo cp ludicrouslink-gateway.service ludicrouslink-gateway@device1.service
 
 # Edit and change ports
-sudo nano /etc/systemd/system/hstreamer-gateway@device1.service
+sudo nano /etc/systemd/system/ludicrouslink-gateway@device1.service
 
 # Enable both
-sudo systemctl enable hstreamer-gateway@device1.service
-sudo systemctl enable hstreamer-gateway@device2.service
+sudo systemctl enable ludicrouslink-gateway@device1.service
+sudo systemctl enable ludicrouslink-gateway@device2.service
 ```
 
 ### Start on Network Ready
@@ -204,25 +204,25 @@ OnFailure=failure-email@%n.service
 
 **CPU and memory usage:**
 ```bash
-systemctl status hstreamer-gateway.service | grep -E 'CPU|Memory'
+systemctl status ludicrouslink-gateway.service | grep -E 'CPU|Memory'
 ```
 
 **Continuous monitoring:**
 ```bash
-watch -n 1 'systemctl status hstreamer-gateway.service | grep -E "Active|CPU|Memory"'
+watch -n 1 'systemctl status ludicrouslink-gateway.service | grep -E "Active|CPU|Memory"'
 ```
 
 ## Uninstall
 
 ```bash
 # Stop service
-sudo systemctl stop hstreamer-gateway.service
+sudo systemctl stop ludicrouslink-gateway.service
 
 # Disable service
-sudo systemctl disable hstreamer-gateway.service
+sudo systemctl disable ludicrouslink-gateway.service
 
 # Remove service file
-sudo rm /etc/systemd/system/hstreamer-gateway.service
+sudo rm /etc/systemd/system/ludicrouslink-gateway.service
 
 # Reload systemd
 sudo systemctl daemon-reload

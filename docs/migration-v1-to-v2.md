@@ -1,6 +1,6 @@
 # Migration Guide: v1 → v2
 
-This guide helps you migrate from HStreamer v1 (RTSP pull) to v2 (RTMP push with discovery).
+This guide helps you migrate from LudicrousLink v1 (RTSP pull) to v2 (RTMP push with discovery).
 
 ## What's Changing
 
@@ -23,7 +23,7 @@ cd pi-gateway
 cp gateway.py gateway_v1_backup.py
 
 # Backup old Android APK
-adb pull /data/app/*/base.apk hstreamer_v1_backup.apk
+adb pull /data/app/*/base.apk ludicrouslink_v1_backup.apk
 ```
 
 ### 2. Update Raspberry Pi Gateway
@@ -57,7 +57,7 @@ cd android-app
 ./gradlew assembleDebug
 
 # Uninstall old version
-adb uninstall com.cesicorp.hstreamer
+adb uninstall com.cesicorp.ludicrouslink
 
 # Install new version
 adb install app/build/outputs/apk/debug/app-debug.apk
@@ -72,10 +72,10 @@ python3 gateway_v2.py
 
 Expected output:
 ```
-[INFO] Starting HStreamer Gateway v2
+[INFO] Starting LudicrousLink Gateway v2
 [INFO] RTMP Server Port: 1935
 [INFO] WebSocket Server: ws://0.0.0.0:8765
-[INFO] mDNS service registered: HStreamer Gateway at 192.168.1.101:1935
+[INFO] mDNS service registered: LudicrousLink Gateway at 192.168.1.101:1935
 [INFO] GStreamer RTMP receiver started
 [INFO] Pipeline started successfully on port 1935
 [INFO] WebSocket server started on ws://0.0.0.0:8765
@@ -109,7 +109,7 @@ sudo systemctl enable avahi-daemon
 sudo systemctl start avahi-daemon
 
 # Test discovery
-avahi-browse -r _hstreamer._tcp
+avahi-browse -r _ludicrouslink._tcp
 ```
 
 ### nginx-rtmp Not Running
@@ -251,7 +251,7 @@ If you need to rollback:
 python3 gateway.py --rtsp-url rtsp://[android-ip]:8554/live
 
 # Android
-adb install hstreamer_v1_backup.apk
+adb install ludicrouslink_v1_backup.apk
 ```
 
 ## Advantages of v2
@@ -270,7 +270,7 @@ After migration you'll enjoy:
 - [ ] Ran `setup_v2.sh` on gateway
 - [ ] Verified nginx-rtmp is running (`systemctl status nginx`)
 - [ ] Verified avahi-daemon is running
-- [ ] Tested mDNS discovery (`avahi-browse -r _hstreamer._tcp`)
+- [ ] Tested mDNS discovery (`avahi-browse -r _ludicrouslink._tcp`)
 - [ ] Rebuilt and installed Android app
 - [ ] Gateway starts with "mDNS service registered" message
 - [ ] Android discovers gateway automatically
@@ -295,7 +295,7 @@ avahi-browse -a
 sudo netstat -tuln | grep -E '1935|8765'
 
 # Android
-adb logcat | grep -E "HStreamer|ServiceDiscovery|RtmpStreamer"
+adb logcat | grep -E "LudicrousLink|ServiceDiscovery|RtmpStreamer"
 
 # Network
 ping [gateway-ip]

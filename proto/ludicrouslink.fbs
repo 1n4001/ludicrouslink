@@ -1,9 +1,9 @@
-// HStreamer WebSocket Protocol Schema
+// LudicrousLink WebSocket Protocol Schema
 // 
 // ServerMessage: sent from backend → browser (video frames, codec info)
 // ClientMessage: sent from browser → backend (touch input, future controls)
 
-namespace hstreamer;
+namespace ludicrouslink;
 
 // ─── Server → Client ───────────────────────────────────
 

@@ -1,6 +1,6 @@
-# HStreamer - Low-Latency Android Screen Streaming
+# LudicrousLink - Low-Latency Android Screen Streaming
 
-[![HStreamer CI](https://github.com/1n4001/hstreamer/actions/workflows/ci.yml/badge.svg)](https://github.com/1n4001/hstreamer/actions/workflows/ci.yml) 
+[![LudicrousLink CI](https://github.com/1n4001/ludicrouslink/actions/workflows/ci.yml/badge.svg)](https://github.com/1n4001/ludicrouslink/actions/workflows/ci.yml) 
 
 A complete system for real-time screen streaming from Android devices to web browsers over a local network.
 
@@ -34,7 +34,7 @@ Once running, access the web client at: **http://localhost:8080**
 ### android App
 Build and install the Android app:
 ```bash
-./gradlew :hstreamerAndroid:app:installDebug
+./gradlew :ludicrouslinkAndroid:app:installDebug
 ```
 
 ## System Architecture (v3)
@@ -66,8 +66,8 @@ graph LR
 ## Project Structure
 
 ```
-hstreamer/
-├── hstreamerAndroid/     # Android application (Kotlin)
+ludicrouslink/
+├── ludicrouslinkAndroid/     # Android application (Kotlin)
 ├── frontend/             # Web Client (React, Vite, TypeScript)
 ├── backend/              # Gateway Server (Go)
 ├── build.gradle.kts      # Root build configuration
@@ -96,7 +96,7 @@ go run .
 ```
 
 ### Android
-Open `hstreamerAndroid` in Android Studio or use Gradle tasks at the root:
+Open `ludicrouslinkAndroid` in Android Studio or use Gradle tasks at the root:
 ```bash
-./gradlew :hstreamerAndroid:app:assembleDebug
+./gradlew :ludicrouslinkAndroid:app:assembleDebug
 ```

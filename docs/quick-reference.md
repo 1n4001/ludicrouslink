@@ -1,4 +1,4 @@
-# HStreamer v2 - Quick Reference
+# LudicrousLink v2 - Quick Reference
 
 ## Architecture
 
@@ -61,14 +61,14 @@ python3 gateway_v2.py
 
 **Gateway advertises:**
 ```
-Service: _hstreamer._tcp.local.
-Name: HStreamer Gateway
+Service: _ludicrouslink._tcp.local.
+Name: LudicrousLink Gateway
 Port: 1935
 ```
 
 **Android discovers:**
 ```kotlin
-NsdManager.discoverServices("_hstreamer._tcp.")
+NsdManager.discoverServices("_ludicrouslink._tcp.")
 → Resolves IP and port
 → Shows in dropdown
 ```
@@ -153,7 +153,7 @@ sudo tail -f /var/log/nginx/error.log
 python3 gateway_v2.py  # Watch console output
 
 # Android logs
-adb logcat | grep HStreamer
+adb logcat | grep LudicrousLink
 ```
 
 ## Testing
@@ -162,10 +162,10 @@ adb logcat | grep HStreamer
 
 ```bash
 # Linux/Mac
-avahi-browse -r _hstreamer._tcp
+avahi-browse -r _ludicrouslink._tcp
 
 # Expected output:
-# _hstreamer._tcp.local
+# _ludicrouslink._tcp.local
 #   hostname = raspberrypi.local
 #   port = [1935]
 ```
@@ -205,13 +205,13 @@ gst-launch-1.0 rtmpsrc location=rtmp://127.0.0.1:1935/live/stream ! \
 
 ```bash
 # Start gateway as service
-sudo systemctl start hstreamer-gateway
+sudo systemctl start ludicrouslink-gateway
 
 # Stop gateway
-sudo systemctl stop hstreamer-gateway
+sudo systemctl stop ludicrouslink-gateway
 
 # Gateway logs (if running as service)
-sudo journalctl -u hstreamer-gateway -f
+sudo journalctl -u ludicrouslink-gateway -f
 
 # Restart nginx
 sudo systemctl restart nginx

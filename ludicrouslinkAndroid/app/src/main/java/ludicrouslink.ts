@@ -2,11 +2,11 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, @typescript-eslint/no-non-null-assertion */
 
-export { ClientMessage } from './hstreamer/client-message.js';
-export { ClientPayload } from './hstreamer/client-payload.js';
-export { CodecInfo } from './hstreamer/codec-info.js';
-export { ServerMessage } from './hstreamer/server-message.js';
-export { ServerPayload } from './hstreamer/server-payload.js';
-export { TouchAction } from './hstreamer/touch-action.js';
-export { TouchEvent } from './hstreamer/touch-event.js';
-export { VideoFrame } from './hstreamer/video-frame.js';
+export { ClientMessage } from './ludicrouslink/client-message.js';
+export { ClientPayload } from './ludicrouslink/client-payload.js';
+export { CodecInfo } from './ludicrouslink/codec-info.js';
+export { ServerMessage } from './ludicrouslink/server-message.js';
+export { ServerPayload } from './ludicrouslink/server-payload.js';
+export { TouchAction } from './ludicrouslink/touch-action.js';
+export { TouchEvent } from './ludicrouslink/touch-event.js';
+export { VideoFrame } from './ludicrouslink/video-frame.js';

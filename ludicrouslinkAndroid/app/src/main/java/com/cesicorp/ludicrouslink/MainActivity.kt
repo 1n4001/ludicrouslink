@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.Manifest
 import android.content.Context
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private var isStreaming = false
     private val REQUEST_PERMISSIONS = 1001
-    private val PREFS_NAME = "HStreamerPrefs"
+    private val PREFS_NAME = "LudicrousLinkPrefs"
     private val KEY_GATEWAY_ADDRESS = "gateway_address"
     private val KEY_QUALITY = "quality"
     private val DEFAULT_PORT = 8888
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
         // Bind AppLog to UI
         AppLog.bind(tvLog, svLog)
-        AppLog.i(TAG, "HStreamer started")
+        AppLog.i(TAG, "LudicrousLink started")
 
         // Restore saved settings
         val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)

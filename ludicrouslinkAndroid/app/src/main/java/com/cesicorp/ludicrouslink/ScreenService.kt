@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -32,10 +32,10 @@ class ScreenService: Service() {
         private const val channelId = "rtpDisplayStreamChannel"
         const val notifyId = 123456
         var INSTANCE: ScreenService? = null
-        const val ACTION_START = "com.cesicorp.hstreamer.ACTION_START"
-        const val ACTION_STOP = "com.cesicorp.hstreamer.ACTION_STOP"
-        const val ACTION_QUIT = "com.cesicorp.hstreamer.ACTION_QUIT"
-        const val ACTION_STREAM_STOPPED = "com.cesicorp.hstreamer.ACTION_STREAM_STOPPED"
+        const val ACTION_START = "com.cesicorp.ludicrouslink.ACTION_START"
+        const val ACTION_STOP = "com.cesicorp.ludicrouslink.ACTION_STOP"
+        const val ACTION_QUIT = "com.cesicorp.ludicrouslink.ACTION_QUIT"
+        const val ACTION_STREAM_STOPPED = "com.cesicorp.ludicrouslink.ACTION_STREAM_STOPPED"
     }
 
     private var notificationManager: NotificationManager? = null
@@ -82,7 +82,7 @@ class ScreenService: Service() {
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
 
         val builder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("HStreamer")
+            .setContentTitle("LudicrousLink")
             .setContentText(content)
             .setSmallIcon(R.drawable.notification_icon)
             .setContentIntent(pendingIntent)

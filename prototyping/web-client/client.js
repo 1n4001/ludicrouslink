@@ -1,5 +1,5 @@
 /**
- * HStreamer Web Client
+ * LudicrousLink Web Client
  * Connects to gateway via WebSocket and displays real-time video stream
  */
 
@@ -246,7 +246,7 @@ class H264VideoDecoder {
     }
 }
 
-class HStreamerClient {
+class LudicrousLinkClient {
     constructor() {
         this.ws = null;
         this.canvas = document.getElementById('videoCanvas');
@@ -766,7 +766,7 @@ class HStreamerClient {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `hstreamer-screenshot-${Date.now()}.jpg`;
+            a.download = `ludicrouslink-screenshot-${Date.now()}.jpg`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -777,6 +777,6 @@ class HStreamerClient {
 
 // Initialize client when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    const client = new HStreamerClient();
-    console.log('HStreamer Web Client initialized');
+    const client = new LudicrousLinkClient();
+    console.log('LudicrousLink Web Client initialized');
 });

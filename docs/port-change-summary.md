@@ -16,7 +16,7 @@ Port 8080 is commonly used by:
 
 Port 8765 is:
 - Less commonly used
-- Was the original HStreamer WebSocket port (maintains continuity)
+- Was the original LudicrousLink WebSocket port (maintains continuity)
 - Still easy to remember
 - Reduces likelihood of port conflicts
 

@@ -68,7 +68,7 @@ Key features:
 Advertises the gateway via mDNS using the `grandcat/zeroconf` library:
 
 - Service type: `_http._tcp`
-- Instance name: `HStreamer Gateway`
+- Instance name: `LudicrousLink Gateway`
 - Automatically advertises the configured HTTP port.
 
 ## Dependencies

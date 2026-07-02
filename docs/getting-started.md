@@ -32,10 +32,10 @@ Once running, open **<http://localhost:8080>** in your browser.
 Build and install the debug APK:
 
 ```bash
-./gradlew :hstreamerAndroid:app:installDebug
+./gradlew :ludicrouslinkAndroid:app:installDebug
 ```
 
-Or open `hstreamerAndroid/` in Android Studio.
+Or open `ludicrouslinkAndroid/` in Android Studio.
 
 !!! tip "Network"
     Make sure your Android device and host machine are on the same local network. The Android app sends the MPEG-TS stream to the gateway's TCP port (default `8888`).
@@ -44,6 +44,6 @@ Or open `hstreamerAndroid/` in Android Studio.
 
 1. Start the backend: `./gradlew runBackend`
 2. Open `http://localhost:8080` in your browser and click **Connect**.
-3. Launch the HStreamer app on your Android device.
+3. Launch the LudicrousLink app on your Android device.
 4. Grant screen capture permission when prompted.
 5. The stream should appear in the browser within seconds.

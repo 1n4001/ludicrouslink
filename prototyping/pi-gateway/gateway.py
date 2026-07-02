@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Raspberry Pi Gateway for HStreamer v2
+Raspberry Pi Gateway for LudicrousLink v2
 Receives RTMP stream FROM Android and forwards to web clients via WebSocket
 Advertises itself via mDNS/Zeroconf for automatic discovery
 Includes video and audio streaming support
@@ -971,7 +971,7 @@ class GStreamerUdpReceiver:
 class ZeroconfService:
     """mDNS/Zeroconf service for gateway discovery"""
 
-    def __init__(self, port: int, name: str = "HStreamer Gateway"):
+    def __init__(self, port: int, name: str = "LudicrousLink Gateway"):
         self.port = port
         self.name = name
         self.zeroconf = None
@@ -988,8 +988,8 @@ class ZeroconfService:
 
             # Create service info
             self.info = ServiceInfo(
-                "_hstreamer._tcp.local.",
-                f"{self.name}._hstreamer._tcp.local.",
+                "_ludicrouslink._tcp.local.",
+                f"{self.name}._ludicrouslink._tcp.local.",
                 addresses=[socket.inet_aton(local_ip)],
                 port=self.port,
                 properties={
@@ -1048,7 +1048,7 @@ class WebServer:
             # Send initial connection message
             await ws.send_str(json.dumps({
                 'type': 'connected',
-                'message': 'Connected to HStreamer gateway'
+                'message': 'Connected to LudicrousLink gateway'
             }))
 
             # Send codec information (include SPS/PPS for H.264 mode if available)
@@ -1270,7 +1270,7 @@ class Gateway:
         udp_port: int = 5000,
         http_host: str = '0.0.0.0',
         http_port: int = 8765,
-        service_name: str = "HStreamer Gateway",
+        service_name: str = "LudicrousLink Gateway",
         video_mode: str = 'h264'
     ):
         self.udp_port = udp_port
@@ -1297,7 +1297,7 @@ class Gateway:
     async def start_async(self):
         """Start the gateway (async)"""
         logger.info("=" * 60)
-        logger.info("HStreamer Gateway v3 - UDP Direct Streaming")
+        logger.info("LudicrousLink Gateway v3 - UDP Direct Streaming")
         logger.info("=" * 60)
         logger.info(f"UDP Server: udp://<gateway-ip>:{self.udp_port}")
         logger.info(f"  Android app sends MPEG-TS stream here (mDNS auto-discovery)")
@@ -1326,7 +1326,7 @@ class Gateway:
 
     async def stop_async(self):
         """Stop the gateway (async)"""
-        logger.info("Stopping HStreamer Gateway")
+        logger.info("Stopping LudicrousLink Gateway")
         self.stream_receiver.stop()
         await self.web_server.stop()
 #        self.zeroconf_service.stop()
@@ -1340,7 +1340,7 @@ def main():
     """Main entry point"""
     import argparse
 
-    parser = argparse.ArgumentParser(description='HStreamer Gateway v3 - UDP Direct Streaming with Integrated HTTP/WebSocket Server')
+    parser = argparse.ArgumentParser(description='LudicrousLink Gateway v3 - UDP Direct Streaming with Integrated HTTP/WebSocket Server')
     parser.add_argument(
         '--udp-port',
         type=int,
@@ -1362,8 +1362,8 @@ def main():
     parser.add_argument(
         '--name',
         type=str,
-        default='HStreamer Gateway',
-        help='Service name for discovery (default: HStreamer Gateway)'
+        default='LudicrousLink Gateway',
+        help='Service name for discovery (default: LudicrousLink Gateway)'
     )
     parser.add_argument(
         '--video-mode',

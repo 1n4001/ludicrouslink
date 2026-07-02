@@ -1,17 +1,17 @@
-# HStreamer Project Structure
+# LudicrousLink Project Structure
 
 Complete overview of the project organization.
 
 ## Directory Tree
 
 ```
-hstreamer/
+ludicrouslink/
 │
 ├── android-app/                    # Part 1: Android RTSP Server
 │   ├── app/
 │   │   ├── src/
 │   │   │   └── main/
-│   │   │       ├── java/com/cesicorp/hstreamer/
+│   │   │       ├── java/com/cesicorp/ludicrouslink/
 │   │   │       │   ├── MainActivity.kt           # Main UI activity
 │   │   │       │   ├── StreamingService.kt       # Foreground service
 │   │   │       │   ├── ScreenEncoder.kt          # H.264 video encoder
@@ -35,7 +35,7 @@ hstreamer/
 │   ├── gateway.py                                # Main gateway script
 │   ├── requirements.txt                          # Python dependencies
 │   ├── setup.sh                                  # Installation script
-│   ├── hstreamer-gateway.service                 # Systemd service file
+│   ├── ludicrouslink-gateway.service                 # Systemd service file
 │   └── INSTALL_SERVICE.md                        # Service installation guide
 │
 ├── web-client/                     # Part 3: Web Browser Client
@@ -150,7 +150,7 @@ hstreamer/
 
 **JavaScript Classes:**
 
-1. **HStreamerClient**
+1. **LudicrousLinkClient**
    - Manages WebSocket connection
    - Decodes base64 JPEG frames
    - Renders to HTML5 Canvas
@@ -300,7 +300,7 @@ python3 -m http.server 8080
 **Option 3: Web Server**
 ```bash
 # Copy to Apache/Nginx web root
-sudo cp web-client/* /var/www/html/hstreamer/
+sudo cp web-client/* /var/www/html/ludicrouslink/
 ```
 
 ## Configuration Files

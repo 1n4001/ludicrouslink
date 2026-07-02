@@ -45,22 +45,22 @@ jobs:
         include:
           - os: linux
             arch: amd64
-            output_name: hstreamer-linux-amd64
+            output_name: ludicrouslink-linux-amd64
           - os: linux
             arch: arm64
-            output_name: hstreamer-linux-arm64
+            output_name: ludicrouslink-linux-arm64
           - os: linux
             arch: arm
-            output_name: hstreamer-linux-arm
+            output_name: ludicrouslink-linux-arm
           - os: windows
             arch: amd64
-            output_name: hstreamer-windows-amd64.exe
+            output_name: ludicrouslink-windows-amd64.exe
           - os: windows
             arch: arm64
-            output_name: hstreamer-windows-arm64.exe
+            output_name: ludicrouslink-windows-arm64.exe
           - os: darwin
             arch: arm64
-            output_name: hstreamer-darwin-arm64
+            output_name: ludicrouslink-darwin-arm64
 
     steps:
     - uses: actions/checkout@v4
@@ -112,13 +112,13 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Android App
-      run: ./gradlew :hstreamerAndroid:app:assembleDebug --stacktrace
+      run: ./gradlew :ludicrouslinkAndroid:app:assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: hstreamer-debug.apk
-        path: hstreamerAndroid/app/build/outputs/apk/debug/app-debug.apk
+        name: ludicrouslink-debug.apk
+        path: ludicrouslinkAndroid/app/build/outputs/apk/debug/app-debug.apk
 
   release:
     needs: [build-backend, build-android]
@@ -135,14 +135,14 @@ jobs:
       run: |
         mkdir -p release
         # Backend binaries
-        cp release-assets/hstreamer-linux-amd64/hstreamer-linux-amd64 release/
-        cp release-assets/hstreamer-linux-arm64/hstreamer-linux-arm64 release/
-        cp release-assets/hstreamer-linux-arm/hstreamer-linux-arm release/
-        cp release-assets/hstreamer-windows-amd64.exe/hstreamer-windows-amd64.exe release/
-        cp release-assets/hstreamer-windows-arm64.exe/hstreamer-windows-arm64.exe release/
-        cp release-assets/hstreamer-darwin-arm64/hstreamer-darwin-arm64 release/
+        cp release-assets/ludicrouslink-linux-amd64/ludicrouslink-linux-amd64 release/
+        cp release-assets/ludicrouslink-linux-arm64/ludicrouslink-linux-arm64 release/
+        cp release-assets/ludicrouslink-linux-arm/ludicrouslink-linux-arm release/
+        cp release-assets/ludicrouslink-windows-amd64.exe/ludicrouslink-windows-amd64.exe release/
+        cp release-assets/ludicrouslink-windows-arm64.exe/ludicrouslink-windows-arm64.exe release/
+        cp release-assets/ludicrouslink-darwin-arm64/ludicrouslink-darwin-arm64 release/
         # Android APK
-        cp release-assets/hstreamer-debug.apk/app-debug.apk release/hstreamer-debug.apk
+        cp release-assets/ludicrouslink-debug.apk/app-debug.apk release/ludicrouslink-debug.apk
         # Frontend dist as zip
         cd release-assets/frontend-dist && zip -r ../../release/frontend-dist.zip . && cd ../..
         ls -la release/
@@ -152,11 +152,11 @@ jobs:
       with:
         generate_release_notes: true
         files: |
-          release/hstreamer-linux-amd64
-          release/hstreamer-linux-arm64
-          release/hstreamer-linux-arm
-          release/hstreamer-windows-amd64.exe
-          release/hstreamer-windows-arm64.exe
-          release/hstreamer-darwin-arm64
-          release/hstreamer-debug.apk
+          release/ludicrouslink-linux-amd64
+          release/ludicrouslink-linux-arm64
+          release/ludicrouslink-linux-arm
+          release/ludicrouslink-windows-amd64.exe
+          release/ludicrouslink-windows-arm64.exe
+          release/ludicrouslink-darwin-arm64
+          release/ludicrouslink-debug.apk
           release/frontend-dist.zip

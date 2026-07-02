@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.content.Context
 import android.net.nsd.NsdManager
@@ -116,6 +116,6 @@ class ServiceDiscovery(private val context: Context) {
 
     companion object {
         private const val TAG = "ServiceDiscovery"
-        private const val SERVICE_TYPE = "_hstreamer._tcp."
+        private const val SERVICE_TYPE = "_ludicrouslink._tcp."
     }
 }

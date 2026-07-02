@@ -2,8 +2,8 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, @typescript-eslint/no-non-null-assertion */
 
-import { CodecInfo } from '../hstreamer/codec-info.js';
-import { VideoFrame } from '../hstreamer/video-frame.js';
+import { CodecInfo } from '../ludicrouslink/codec-info.js';
+import { VideoFrame } from '../ludicrouslink/video-frame.js';
 
 
 export enum ServerPayload {

@@ -1,6 +1,6 @@
-# HStreamer Documentation
+# LudicrousLink Documentation
 
-Complete documentation for HStreamer - a low-latency screen and audio streaming system for Android to web browsers.
+Complete documentation for LudicrousLink - a low-latency screen and audio streaming system for Android to web browsers.
 
 ## Quick Links
 
@@ -12,7 +12,7 @@ Complete documentation for HStreamer - a low-latency screen and audio streaming 
 
 ### Getting Started
 
-- **[quick-start.md](quick-start.md)** - Complete guide to get HStreamer running in 3 steps (v2, recommended)
+- **[quick-start.md](quick-start.md)** - Complete guide to get LudicrousLink running in 3 steps (v2, recommended)
 - **[quickstart-v1.md](quickstart-v1.md)** - Quick start guide for v1 (RTSP pull model, legacy)
 - **[readme-v2.md](readme-v2.md)** - Comprehensive v2 documentation with architecture details
 
@@ -108,9 +108,9 @@ ffmpeg -re -stream_loop -1 -i test.mp4 \
 
 ### Install as Systemd Service
 ```bash
-sudo cp docs/hstreamer.service /etc/systemd/system/
-sudo systemctl enable hstreamer
-sudo systemctl start hstreamer
+sudo cp docs/ludicrouslink.service /etc/systemd/system/
+sudo systemctl enable ludicrouslink
+sudo systemctl start ludicrouslink
 ```
 
 ## URLs and Ports
@@ -219,7 +219,7 @@ sudo tail -f /var/log/nginx/error.log
 
 **Android logs:**
 ```bash
-adb logcat | grep HStreamer
+adb logcat | grep LudicrousLink
 ```
 
 ## Development
@@ -227,7 +227,7 @@ adb logcat | grep HStreamer
 ### Project Structure
 
 ```
-hstreamer/
+ludicrouslink/
 ├── android-app/          # Android application (Kotlin)
 ├── pi-gateway/           # Raspberry Pi gateway (Python)
 │   ├── gateway.py        # Main gateway server

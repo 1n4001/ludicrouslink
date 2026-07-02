@@ -4,7 +4,7 @@
 
 import * as flatbuffers from 'flatbuffers';
 
-import { TouchAction } from '../hstreamer/touch-action.js';
+import { TouchAction } from '../ludicrouslink/touch-action.js';
 
 
 export class TouchEvent {

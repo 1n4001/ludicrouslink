@@ -1,12 +1,12 @@
 # Build System
 
-HStreamer uses a **Gradle monorepo** to orchestrate builds across three different technology stacks: Android (Kotlin), Frontend (Node.js/React), and Backend (Go).
+LudicrousLink uses a **Gradle monorepo** to orchestrate builds across three different technology stacks: Android (Kotlin), Frontend (Node.js/React), and Backend (Go).
 
 ## Project Layout
 
 ```mermaid
 graph TD
-    Root["Root build.gradle.kts"] --> Android[":hstreamerAndroid:app"]
+    Root["Root build.gradle.kts"] --> Android[":ludicrouslinkAndroid:app"]
     Root --> Frontend[":frontend"]
     Root --> Backend[":backend"]
     Frontend -.->|"copies dist/"| Backend
@@ -17,9 +17,9 @@ graph TD
 `settings.gradle.kts` declares all subprojects:
 
 ```kotlin
-rootProject.name = "hstreamer"
-include(":hstreamerAndroid")
-include(":hstreamerAndroid:app")
+rootProject.name = "ludicrouslink"
+include(":ludicrouslinkAndroid")
+include(":ludicrouslinkAndroid:app")
 include(":frontend")
 include(":backend")
 ```
@@ -69,7 +69,7 @@ Provides top-level convenience tasks:
 ./gradlew :backend:build
 
 # Build only the Android APK
-./gradlew :hstreamerAndroid:app:assembleDebug
+./gradlew :ludicrouslinkAndroid:app:assembleDebug
 
 # Set up Android SDK (Windows only)
 ./gradlew setupAndroidSdk

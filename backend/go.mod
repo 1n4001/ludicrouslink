@@ -1,4 +1,4 @@
-module hstreamer/backend
+module ludicrouslink/backend
 
 go 1.22
 

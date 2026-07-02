@@ -1,7 +1,7 @@
 # Integrated Web Server
 
 ## Overview
-The HStreamer gateway now includes an integrated HTTP server that hosts the web client directly. No need to run a separate web server!
+The LudicrousLink gateway now includes an integrated HTTP server that hosts the web client directly. No need to run a separate web server!
 
 ## What Changed
 
@@ -48,7 +48,7 @@ python3 gateway.py --help
 - `--rtmp-port`: RTMP server port (default: 1935)
 - `--http-host`: HTTP/WebSocket host (default: 0.0.0.0)
 - `--http-port`: HTTP/WebSocket port (default: 8765, less common than 8080)
-- `--name`: Service name for mDNS discovery (default: "HStreamer Gateway")
+- `--name`: Service name for mDNS discovery (default: "LudicrousLink Gateway")
 - `--video-mode`: Video encoding mode - `h264` (browser-side decode, low CPU) or `jpeg` (gateway-side decode, legacy) (default: h264)
 
 ### Video Modes
@@ -119,16 +119,16 @@ python3 gateway.py
 **Expected Output:**
 ```
 ============================================================
-HStreamer Gateway v2 - Starting
+LudicrousLink Gateway v2 - Starting
 ============================================================
 RTMP Server Port: 1935
 HTTP Server: http://0.0.0.0:8765
 WebSocket: ws://0.0.0.0:8765/ws
-Service Name: HStreamer Gateway
+Service Name: LudicrousLink Gateway
 Video Mode: H264 (browser-side decode)
 Features: Video + Audio streaming, Web UI
 ============================================================
-mDNS service registered: HStreamer Gateway at 192.168.x.x:1935
+mDNS service registered: LudicrousLink Gateway at 192.168.x.x:1935
 GStreamer RTMP receiver started
 Using H.264 passthrough mode (browser-side decoding)
 HTTP server started on http://0.0.0.0:8765
@@ -150,7 +150,7 @@ When you access the web client from the gateway, the WebSocket URL is automatica
 
 ### 4. Start Android Streaming
 
-1. Open HStreamer app
+1. Open LudicrousLink app
 2. Select gateway from dropdown
 3. Tap "Start Streaming"
 4. Video and audio appear in browser automatically
@@ -207,7 +207,7 @@ python3 gateway.py --http-port 8766 --rtmp-port 1936 --name "Gateway 2"
 ## File Structure
 
 ```
-hstreamer/
+ludicrouslink/
 ├── pi-gateway/
 │   ├── gateway.py          # Main gateway with integrated HTTP server
 │   ├── requirements.txt    # Python dependencies (includes aiohttp)
@@ -259,7 +259,7 @@ curl -i -N -H "Connection: Upgrade" -H "Upgrade: websocket" http://localhost:876
 **Fix:**
 ```bash
 # Ensure web-client directory is in correct location
-cd /path/to/hstreamer
+cd /path/to/ludicrouslink
 ls -la web-client/
 # Should show index.html, client.js, style.css
 ```

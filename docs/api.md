@@ -1,6 +1,6 @@
-# HStreamer API Documentation
+# LudicrousLink API Documentation
 
-Technical reference for developers extending or integrating with HStreamer.
+Technical reference for developers extending or integrating with LudicrousLink.
 
 ## Table of Contents
 
@@ -233,7 +233,7 @@ Stops server and disconnects all clients.
 ```sdp
 v=0
 o=- 0 0 IN IP4 127.0.0.1
-s=HStreamer
+s=LudicrousLink
 t=0 0
 m=video 0 RTP/AVP 96
 a=rtpmap:96 H264/90000
@@ -536,7 +536,7 @@ All messages are JSON-encoded strings.
 ```json
 {
   "type": "connected",
-  "message": "Connected to HStreamer gateway"
+  "message": "Connected to LudicrousLink gateway"
 }
 ```
 
@@ -678,7 +678,7 @@ Content-Length: 456
 
 v=0
 o=- 0 0 IN IP4 127.0.0.1
-s=HStreamer
+s=LudicrousLink
 t=0 0
 m=video 0 RTP/AVP 96
 a=rtpmap:96 H264/90000

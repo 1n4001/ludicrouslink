@@ -1,4 +1,4 @@
-package com.cesicorp.hstreamer
+package com.cesicorp.ludicrouslink
 
 import android.content.Intent
 import android.media.MediaCodec
@@ -11,13 +11,13 @@ import android.os.Looper
 import android.util.Log
 import android.view.Surface
 import com.google.flatbuffers.FlatBufferBuilder
-import hstreamer.ClientMessage
-import hstreamer.ClientPayload
-import hstreamer.CodecInfo
-import hstreamer.ServerMessage
-import hstreamer.ServerPayload
-import hstreamer.TouchEvent
-import hstreamer.VideoFrame
+import ludicrouslink.ClientMessage
+import ludicrouslink.ClientPayload
+import ludicrouslink.CodecInfo
+import ludicrouslink.ServerMessage
+import ludicrouslink.ServerPayload
+import ludicrouslink.TouchEvent
+import ludicrouslink.VideoFrame
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -158,7 +158,7 @@ class WebSocketStreamer(
 
         mediaProjection?.registerCallback(projectionCallback, Handler(Looper.getMainLooper()))
         virtualDisplay = mediaProjection?.createVirtualDisplay(
-            "HStreamer", width, height, 1, 0, inputSurface, null, null
+            "LudicrousLink", width, height, 1, 0, inputSurface, null, null
         )
     }
 

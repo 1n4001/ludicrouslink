@@ -1,6 +1,6 @@
-# HStreamer Network Setup Guide
+# LudicrousLink Network Setup Guide
 
-Comprehensive guide for configuring your network for optimal HStreamer performance.
+Comprehensive guide for configuring your network for optimal LudicrousLink performance.
 
 ## Network Topology
 
@@ -115,7 +115,7 @@ Ensure these ports are open:
 #### Android Firewall
 
 Most Android devices don't have built-in firewalls. If you use a firewall app:
-- Allow HStreamer app
+- Allow LudicrousLink app
 - Allow TCP port 8554
 
 #### Raspberry Pi Firewall (UFW)
@@ -147,7 +147,7 @@ Usually no configuration needed for outbound WebSocket connections.
 If issues:
 ```powershell
 # Allow outbound on port 8765
-New-NetFirewallRule -DisplayName "HStreamer Client" -Direction Outbound -LocalPort 8765 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "LudicrousLink Client" -Direction Outbound -LocalPort 8765 -Protocol TCP -Action Allow
 ```
 
 ## Network Testing
@@ -257,7 +257,7 @@ Optimal router settings:
 ### 4. Disable Power Saving
 
 **Android:**
-Settings → Battery → Battery Optimization → HStreamer → Don't Optimize
+Settings → Battery → Battery Optimization → LudicrousLink → Don't Optimize
 
 **Raspberry Pi:**
 ```bash
@@ -440,4 +440,4 @@ Network setup is complete when:
 - [ ] QoS configured (optional)
 - [ ] 5GHz Wi-Fi enabled (recommended)
 
-Your network is now optimized for HStreamer! 🚀
+Your network is now optimized for LudicrousLink! 🚀

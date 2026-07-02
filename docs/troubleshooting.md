@@ -1,4 +1,4 @@
-# HStreamer Troubleshooting Guide
+# LudicrousLink Troubleshooting Guide
 
 Comprehensive guide to diagnosing and fixing common issues.
 
@@ -19,11 +19,11 @@ Comprehensive guide to diagnosing and fixing common issues.
 
 **Symptoms:**
 - App closes immediately after launch
-- "HStreamer has stopped" message
+- "LudicrousLink has stopped" message
 
 **Diagnosis:**
 ```bash
-adb logcat | grep -E 'AndroidRuntime|HStreamer'
+adb logcat | grep -E 'AndroidRuntime|LudicrousLink'
 ```
 
 **Solutions:**
@@ -34,12 +34,12 @@ adb logcat | grep -E 'AndroidRuntime|HStreamer'
 
 2. **Clear app data:**
    ```bash
-   adb shell pm clear com.cesicorp.hstreamer
+   adb shell pm clear com.cesicorp.ludicrouslink
    ```
 
 3. **Reinstall app:**
    ```bash
-   adb uninstall com.cesicorp.hstreamer
+   adb uninstall com.cesicorp.ludicrouslink
    adb install app-debug.apk
    ```
 
@@ -56,7 +56,7 @@ adb logcat | grep -E 'AndroidRuntime|HStreamer'
 **Solutions:**
 
 1. **Grant permissions manually:**
-   - Settings → Apps → HStreamer → Permissions
+   - Settings → Apps → LudicrousLink → Permissions
    - Enable all requested permissions
 
 2. **Check screen overlay:**
@@ -76,7 +76,7 @@ adb logcat | grep -E 'AndroidRuntime|HStreamer'
 
 1. **Check microphone permission:**
    ```bash
-   adb shell pm grant com.cesicorp.hstreamer android.permission.RECORD_AUDIO
+   adb shell pm grant com.cesicorp.ludicrouslink android.permission.RECORD_AUDIO
    ```
 
 2. **Verify Android version:**
@@ -161,7 +161,7 @@ adb logcat | grep MediaCodec
 
 2. **Check notification permission:**
    ```bash
-   adb shell pm grant com.cesicorp.hstreamer android.permission.POST_NOTIFICATIONS
+   adb shell pm grant com.cesicorp.ludicrouslink android.permission.POST_NOTIFICATIONS
    ```
 
 ---
@@ -294,7 +294,7 @@ sudo lsof -i :8765
 
 3. **Check for systemd service:**
    ```bash
-   sudo systemctl stop hstreamer-gateway.service
+   sudo systemctl stop ludicrouslink-gateway.service
    ```
 
 ### No Frames Being Received
@@ -695,7 +695,7 @@ ffprobe rtsp://192.168.1.100:8554/live
 
 2. **Check audio permission:**
    ```bash
-   adb shell pm grant com.cesicorp.hstreamer android.permission.RECORD_AUDIO
+   adb shell pm grant com.cesicorp.ludicrouslink android.permission.RECORD_AUDIO
    ```
 
 3. **Verify audio track in stream:**
@@ -774,7 +774,7 @@ cat /proc/cpuinfo >> system_info.txt
 
 ```bash
 # Check if Android app is running
-adb shell "ps -A | grep hstreamer"
+adb shell "ps -A | grep ludicrouslink"
 
 # Check ports on Android
 adb shell "netstat -tuln | grep 8554"
